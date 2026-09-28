@@ -1,0 +1,784 @@
+/* ==========================================================
+   Museum Booking System - Professional Museum Details Styles
+   ========================================================== */
+
+/* Main layout wrapper */
+.museum-details-main {
+    background-color: #f8fafc;
+    min-height: 80vh;
+    padding: 92px 0 60px 0;
+}
+
+.museum-details-container {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 24px;
+    box-sizing: border-box;
+}
+
+/* Subtle, Muted Breadcrumb Navigation */
+.museum-breadcrumb {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 8px 12px;
+    font-size: 0.88rem;
+    color: #64748b;
+    margin: 0 0 16px 0;
+    padding: 0;
+    height: auto;
+    width: 100%;
+    line-height: 1.4;
+    box-sizing: border-box;
+}
+
+.museum-breadcrumb a {
+    color: #475569;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+    white-space: nowrap;
+}
+
+.museum-breadcrumb a:hover {
+    color: #FF9933;
+}
+
+.breadcrumb-separator {
+    font-size: 0.68rem;
+    color: #94a3b8;
+    margin: 0;
+    display: inline-flex;
+    align-items: center;
+}
+
+.breadcrumb-current {
+    color: #0f172a;
+    font-weight: 600;
+    white-space: normal;
+    word-break: break-word;
+}
+
+/* Hero Image: Fixed, Consistent Aspect Ratio Landscape Presentation */
+.museum-hero-wrapper {
+    width: 100%;
+    aspect-ratio: 16 / 7;
+    max-height: 480px;
+    min-height: 220px;
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: #e2e8f0;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    margin-bottom: 28px;
+    position: relative;
+}
+
+.museum-hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+/* Museum Identity Section: Title + Compact Metadata Bar */
+.museum-identity-section {
+    position: static;
+    width: 100%;
+    margin-bottom: 34px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.museum-title {
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: #0f172a;
+    line-height: 1.25;
+    margin: 0 0 14px 0;
+    word-break: break-word;
+    letter-spacing: -0.01em;
+}
+
+.museum-meta-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 18px 28px;
+    font-size: 0.95rem;
+    color: #475569;
+}
+
+.meta-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
+}
+
+.meta-icon {
+    font-size: 1rem;
+    color: #FF9933;
+    width: 18px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+/* Sections Common Styling */
+.museum-section {
+    margin-bottom: 36px;
+}
+
+.section-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-align: left;
+}
+
+.section-icon {
+    color: #FF9933;
+    font-size: 1.15rem;
+    width: 22px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+/* About Section */
+.about-section {
+    margin-bottom: 36px;
+}
+
+.museum-description {
+    max-width: 900px;
+}
+
+.museum-description p {
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: #334155;
+    margin: 0;
+}
+
+/* Visit Information 3-Column Responsive Grid */
+.visit-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 14px;
+}
+
+.visit-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 22px 24px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.visit-card:hover {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.07);
+}
+
+.visit-card-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.card-header-icon {
+    font-size: 1.15rem;
+    color: #FF9933;
+    width: 20px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.visit-card-header h3 {
+    font-size: 1.12rem;
+    font-weight: 600;
+    color: #0f172a;
+    margin: 0;
+}
+
+.visit-card-body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+/* Operating Hours Card Content */
+.hours-highlight {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin-bottom: 14px;
+}
+
+.hours-time {
+    display: block;
+    font-size: 1.08rem;
+    font-weight: 700;
+    color: #0f172a;
+    text-align: center;
+}
+
+.schedule-rows {
+    margin-bottom: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.schedule-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.92rem;
+    color: #334155;
+    line-height: 1.4;
+}
+
+.schedule-label {
+    font-weight: 600;
+    color: #475569;
+    flex-shrink: 0;
+}
+
+.schedule-value {
+    text-align: right;
+}
+
+.schedule-row.closed-day .schedule-value {
+    color: #dc2626;
+    font-weight: 500;
+}
+
+/* Ticket Prices Card Content */
+.ticket-price-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 14px;
+}
+
+.ticket-price-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 6px 0;
+    border-bottom: 1px dashed #f1f5f9;
+    font-size: 0.95rem;
+}
+
+.ticket-price-row:last-child {
+    border-bottom: none;
+}
+
+.ticket-category {
+    color: #334155;
+    font-weight: 500;
+}
+
+.ticket-category small {
+    color: #64748b;
+    font-size: 0.8rem;
+}
+
+.ticket-rate {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #0284c7;
+}
+
+/* Visitor Amenities Card Content */
+.amenities-list {
+    list-style: none;
+    margin: 0 0 14px 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+}
+
+.amenities-list li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.92rem;
+    color: #334155;
+}
+
+.amenity-icon {
+    font-size: 0.95rem;
+    color: #0284c7;
+    width: 20px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+/* Card Footer Notes */
+.card-footer-note {
+    margin-top: auto;
+    padding-top: 10px;
+    border-top: 1px solid #f1f5f9;
+    font-size: 0.82rem;
+    color: #64748b;
+    line-height: 1.45;
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+}
+
+.note-icon {
+    font-size: 0.8rem;
+    color: #94a3b8;
+    margin-top: 2px;
+    flex-shrink: 0;
+}
+
+/* Dedicated Booking CTA Section */
+.booking-cta-banner {
+    background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
+    border: 1px solid #fed7aa;
+    border-radius: 14px;
+    padding: 28px 32px;
+    margin-top: 36px;
+    margin-bottom: 32px;
+    box-shadow: 0 2px 8px rgba(255, 153, 51, 0.08);
+}
+
+.booking-cta-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+.booking-cta-text h3 {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: #9a3412;
+    margin: 0 0 6px 0;
+}
+
+.booking-cta-text p {
+    font-size: 0.95rem;
+    color: #7c2d12;
+    margin: 0;
+}
+
+.btn-book-now {
+    background-color: #FF9933;
+    color: #ffffff;
+    font-size: 1.05rem;
+    font-weight: 700;
+    padding: 13px 30px;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(255, 153, 51, 0.35);
+    white-space: nowrap;
+    transition: all 0.2s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-book-now:hover {
+    background-color: #e67e17;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(255, 153, 51, 0.45);
+    color: #ffffff;
+}
+
+/* Virtual Reality Tour Section (Unobtrusive & Clean) */
+.vr-tour-section {
+    margin-top: 0;
+    margin-bottom: 24px;
+}
+
+.vr-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 18px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
+}
+
+.vr-card-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    background: #e0f2fe;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #0284c7;
+    font-size: 1.25rem;
+    flex-shrink: 0;
+}
+
+.vr-card-info {
+    flex: 1;
+}
+
+.vr-card-info h4 {
+    font-size: 1.02rem;
+    font-weight: 600;
+    color: #0f172a;
+    margin: 0 0 3px 0;
+}
+
+.vr-card-info p {
+    font-size: 0.88rem;
+    color: #64748b;
+    margin: 0;
+}
+
+.btn-vr-launch {
+    border: 1.5px solid #cbd5e1;
+    color: #334155;
+    background: #ffffff;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+}
+
+.btn-vr-launch:hover {
+    border-color: #0284c7;
+    color: #0284c7;
+    background: #f0f9ff;
+}
+
+/* Loading & Empty States */
+.museum-loading-state,
+.empty-state {
+    text-align: center;
+    padding: 5rem 1rem;
+    background: #ffffff;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+}
+
+.museum-loading-state i {
+    color: #FF9933;
+}
+
+.museum-loading-state p {
+    margin-top: 1rem;
+    color: #64748b;
+    font-size: 0.95rem;
+}
+
+/* ==========================================================
+   HOMEPAGE-ALIGNED FOOTER STYLES
+   ========================================================== */
+
+footer, .footer {
+    background: #000080; /* Ashoka Chakra Deep Navy identical to homepage footer */
+    color: #ffffff;
+    padding: 3rem 5% 1.5rem;
+    margin-top: 0;
+    position: relative;
+    z-index: 10;
+}
+
+.footer-content,
+.footer-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2rem;
+    max-width: 1280px;
+    margin: 0 auto 2rem;
+    padding: 0;
+}
+
+.footer-section h3,
+.footer-col h3,
+.footer-col h4 {
+    margin-bottom: 1rem;
+    color: #FF9933; /* Saffron Orange identical to homepage footer */
+    font-size: 1.2rem;
+    font-weight: 700;
+    position: static;
+}
+
+.footer-col h4::after,
+.footer-section h3::after {
+    display: none !important;
+}
+
+.footer-section p,
+.footer-col p {
+    color: #cbd5e1;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 0.6rem;
+}
+
+.footer-section ul,
+.footer-col ul,
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-section ul li,
+.footer-col ul li,
+.footer-links li {
+    margin-bottom: 0.6rem;
+}
+
+.footer-section ul li a,
+.footer-col ul li a,
+.footer-links a {
+    color: #e2e8f0;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color 0.3s ease;
+    display: inline-block;
+    padding-left: 0;
+}
+
+.footer-section ul li a:hover,
+.footer-col ul li a:hover,
+.footer-links a:hover {
+    color: #FF9933;
+    padding-left: 0;
+}
+
+footer > p,
+.footer-bottom {
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    padding-top: 1.5rem;
+    color: #94a3b8;
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+.footer-bottom p {
+    border-top: none;
+    padding-top: 0;
+    color: inherit;
+    font-size: inherit;
+    margin: 0;
+}
+
+/* ==========================================================
+   RESPONSIVE DESIGN BREAKPOINTS
+   ========================================================== */
+
+/* Tablet / Medium Screens (max-width: 992px) */
+@media (max-width: 992px) {
+    .visit-cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    .booking-cta-content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 18px;
+    }
+
+    .btn-book-now {
+        align-self: flex-start;
+    }
+
+    .museum-title {
+        font-size: 1.95rem;
+    }
+}
+
+/* Tablet Portrait & Large Mobiles (max-width: 768px) */
+@media (max-width: 768px) {
+    .museum-details-main {
+        padding: 80px 0 40px 0;
+    }
+
+    .museum-details-container {
+        padding: 0 16px;
+    }
+
+    .museum-breadcrumb {
+        gap: 8px 10px;
+        margin-bottom: 14px;
+    }
+
+    .museum-hero-wrapper {
+        aspect-ratio: 16 / 9;
+        max-height: 340px;
+        min-height: 200px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+    }
+
+    .museum-identity-section {
+        margin-bottom: 26px;
+        padding-bottom: 18px;
+    }
+
+    .museum-title {
+        font-size: 1.65rem;
+        line-height: 1.3;
+        margin-bottom: 12px;
+    }
+
+    .museum-meta-bar {
+        gap: 12px 18px;
+        font-size: 0.9rem;
+    }
+
+    .museum-section {
+        margin-bottom: 28px;
+    }
+
+    .section-title {
+        font-size: 1.25rem;
+        margin-bottom: 12px;
+    }
+
+    .museum-description p {
+        font-size: 0.98rem;
+        line-height: 1.68;
+    }
+
+    .visit-cards-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .booking-cta-banner {
+        padding: 22px 20px;
+        margin-top: 28px;
+        margin-bottom: 24px;
+        border-radius: 12px;
+    }
+
+    .booking-cta-content {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 16px;
+    }
+
+    .booking-cta-text h3 {
+        font-size: 1.2rem;
+    }
+
+    .btn-book-now {
+        width: 100%;
+        justify-content: center;
+        padding: 12px 20px;
+        font-size: 1rem;
+    }
+
+    .vr-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+        padding: 18px 20px;
+    }
+
+    .btn-vr-launch {
+        width: 100%;
+        justify-content: center;
+    }
+
+    footer, .footer {
+        padding: 2.5rem 1.2rem 1.2rem;
+    }
+
+    .footer-content,
+    .footer-container {
+        grid-template-columns: 1fr;
+        gap: 1.8rem;
+        margin-bottom: 1.5rem;
+    }
+}
+
+/* Small Mobile Screens (max-width: 480px) */
+@media (max-width: 480px) {
+    .museum-details-container {
+        padding: 0 14px;
+    }
+
+    .museum-hero-wrapper {
+        aspect-ratio: 16 / 10;
+        max-height: 240px;
+        border-radius: 8px;
+    }
+
+    .museum-title {
+        font-size: 1.45rem;
+    }
+
+    .museum-meta-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .museum-breadcrumb {
+        gap: 6px 10px;
+        margin-bottom: 12px;
+        font-size: 0.82rem;
+    }
+
+    .breadcrumb-current {
+        max-width: 100%;
+        white-space: normal;
+    }
+
+    .visit-card {
+        padding: 18px 16px;
+    }
+
+    footer, .footer {
+        padding: 2rem 1rem 1rem;
+    }
+
+    .footer-section h3,
+    .footer-col h3,
+    .footer-col h4 {
+        font-size: 1.1rem;
+        margin-bottom: 0.8rem;
+    }
+
+    footer > p,
+    .footer-bottom {
+        font-size: 0.82rem;
+        padding-top: 1.2rem;
+    }
+
+    .footer-bottom p {
+        border-top: none;
+        padding-top: 0;
+    }
+}

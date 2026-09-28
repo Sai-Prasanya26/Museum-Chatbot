@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Travel Explorer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/auth.css">
+    <link rel="stylesheet" href="/css/chatbot.css">
+</head>
+<body>
+
+    <div class="background-gradient"></div>
+    <div class="circle circle-1"></div>
+    <div class="circle circle-2"></div>
+    <div class="circle circle-3"></div>
+
+    <div class="main-container">
+        <div id="signIn" class="container">
+            <div class="header">
+                <h1>Welcome Back!</h1>
+                <p>Login to book your next adventure</p>
+            </div>
+
+            <div id="signInMessage" class="messageDiv"></div>
+
+            <form id="loginForm">
+                <div class="form-group">
+                    <input type="email" id="email" placeholder="Email" required autocomplete="email">
+                    <div id="emailError" class="error"></div>
+                </div>
+
+                <div class="form-group">
+                    <input type="password" id="password" placeholder="Password" required autocomplete="current-password">
+                    <div id="passwordError" class="error"></div>
+                </div>
+
+                <div class="remember-forgot">
+                    <div class="checkbox-wrapper" id="rememberWrapper">
+                        <div id="rememberCheckbox" class="custom-checkbox"></div>
+                        Remember me
+                    </div>
+                    <a href="#" class="forgot-password" onclick="showDemoAlert(event)">Forgot Password?</a>
+                </div>
+
+                <button type="submit" id="submitSignIn">Login</button>
+            </form>
+
+            <div class="signup-link">
+                Don't have an account?
+                <a href="/pages/register.html" class="text-btn">Sign up</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/api.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/auth.js"></script>
+    <script src="/js/chatbot.js"></script>
+    <script>
+        function showDemoAlert(e) {
+            e.preventDefault();
+            alert('Password reset link has been dispatched to your email.');
+        }
+        document.getElementById('rememberWrapper')?.addEventListener('click', function() {
+            document.getElementById('rememberCheckbox')?.classList.toggle('checked');
+        });
+    </script>
+</body>
+</html>

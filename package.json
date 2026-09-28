@@ -1,0 +1,11 @@
+{
+  "name": "museum-project",
+  "version": "1.0.0",
+  "description": "Museum Discovery & Ticket Booking System",
+  "scripts": {
+    "start": "node backend/server.js",
+    "server": "node backend/server.js",
+    "mysql": "\"C:\\Program Files\\MySQL\\MySQL Server 8.0\\bin\\mysqld.exe\" --datadir=\"C:\\Users\\saipr.SAIPRASANYA.000\\Desktop\\Puppyyy\\mysql-data\" --port=3306 --console",
+    "mysql:cli": "\"C:\\Program Files\\MySQL\\MySQL Server 8.0\\bin\\mysql.exe\" -u root"
+  }
+}

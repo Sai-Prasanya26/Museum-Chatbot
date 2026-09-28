@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Travel Explorer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+
+    <div class="admin-layout">
+        <!-- Sidebar -->
+        <aside class="admin-sidebar" id="adminSidebar">
+            <div class="sidebar-header">
+                <div class="brand-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <div>
+                    <h2>Travel Explorer</h2>
+                    <span class="badge">Admin Portal</span>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a class="nav-item active" onclick="switchSection('overview')">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Overview</span>
+                </a>
+                <a class="nav-item" onclick="switchSection('museums')">
+                    <i class="fas fa-landmark"></i>
+                    <span>Museums</span>
+                </a>
+                <a class="nav-item" onclick="switchSection('bookings')">
+                    <i class="fas fa-ticket-alt"></i>
+                    <span>Bookings</span>
+                </a>
+                <a class="nav-item" onclick="switchSection('users')">
+                    <i class="fas fa-users"></i>
+                    <span>Users</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a onclick="handleAdminLogout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="admin-main">
+            <!-- Topbar -->
+            <header class="admin-topbar">
+                <div class="topbar-left">
+                    <button class="topbar-mobile-toggle" onclick="toggleSidebar()">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h1 class="topbar-title" id="pageTitle">Overview</h1>
+                </div>
+
+                <div class="topbar-right">
+                    <a href="/homepage.html" class="site-link-btn" title="View main museum application">
+                        <i class="fas fa-globe"></i>
+                        <span>View Site</span>
+                    </a>
+
+                    <div class="admin-profile">
+                        <div class="admin-avatar" id="adminAvatar">A</div>
+                        <div class="admin-info">
+                            <div class="name" id="adminName">Admin</div>
+                            <div class="role">Super Administrator</div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Body Contents -->
+            <div class="admin-content">
+
+                <!-- 1. OVERVIEW SECTION -->
+                <section id="section-overview" class="admin-section active">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon users"><i class="fas fa-users"></i></div>
+                            <div class="stat-details">
+                                <h3>Total Users</h3>
+                                <div class="value" id="statUsers">-</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon museums"><i class="fas fa-landmark"></i></div>
+                            <div class="stat-details">
+                                <h3>Museums</h3>
+                                <div class="value" id="statMuseums">-</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon bookings"><i class="fas fa-ticket-alt"></i></div>
+                            <div class="stat-details">
+                                <h3>Total Bookings</h3>
+                                <div class="value" id="statBookings">-</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon revenue"><i class="fas fa-rupee-sign"></i></div>
+                            <div class="stat-details">
+                                <h3>Total Revenue</h3>
+                                <div class="value" id="statRevenue">₹0</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Bookings Table -->
+                    <div class="panel-card">
+                        <div class="panel-header">
+                            <h3>Recent Bookings</h3>
+                            <button class="btn-secondary btn-sm" onclick="switchSection('bookings')">View All</button>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="admin-table">
+                                <thead>
+                                    <tr>
+                                        <th>Ref ID</th>
+                                        <th>Customer</th>
+                                        <th>Museum</th>
+                                        <th>Visit Date</th>
+                                        <th>Amount</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="recentBookingsTbody">
+                                    <tr><td colspan="6" class="empty-state"><i class="fas fa-spinner fa-spin"></i> Loading...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 2. MUSEUMS SECTION -->
+                <section id="section-museums" class="admin-section">
+                    <div class="panel-card">
+                        <div class="panel-header">
+                            <h3>Manage Museums</h3>
+                            <div class="panel-actions">
+                                <div class="search-input-wrapper">
+                                    <i class="fas fa-search"></i>
+                                    <input type="text" id="museumSearchInput" placeholder="Search museums..." oninput="handleMuseumSearch()">
+                                </div>
+                                <button class="btn-primary" onclick="openAddMuseumModal()">
+                                    <i class="fas fa-plus"></i> Add Museum
+                                </button>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="admin-table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Name</th>
+                                        <th>Location</th>
+                                        <th>Timings</th>
+                                        <th>Adult Price</th>
+                                        <th>Child Price</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="museumsTableBody">
+                                    <tr><td colspan="7" class="empty-state"><i class="fas fa-spinner fa-spin"></i> Loading museums...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 3. BOOKINGS SECTION -->
+                <section id="section-bookings" class="admin-section">
+                    <div class="panel-card">
+                        <div class="panel-header">
+                            <h3>All Customer Bookings</h3>
+                            <div class="panel-actions">
+                                <div class="search-input-wrapper">
+                                    <i class="fas fa-search"></i>
+                                    <input type="text" id="bookingSearchInput" placeholder="Search reference or user..." oninput="filterBookings()">
+                                </div>
+                                <select id="bookingStatusFilter" class="filter-select" onchange="filterBookings()">
+                                    <option value="ALL">All Statuses</option>
+                                    <option value="CONFIRMED">Confirmed</option>
+                                    <option value="PENDING">Pending</option>
+                                    <option value="CANCELLED">Cancelled</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="admin-table">
+                                <thead>
+                                    <tr>
+                                        <th>Booking Ref</th>
+                                        <th>Customer</th>
+                                        <th>Museum</th>
+                                        <th>Visit Date</th>
+                                        <th>Tickets</th>
+                                        <th>Total Price</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="bookingsTableBody">
+                                    <tr><td colspan="8" class="empty-state"><i class="fas fa-spinner fa-spin"></i> Loading bookings...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 4. USERS SECTION -->
+                <section id="section-users" class="admin-section">
+                    <div class="panel-card">
+                        <div class="panel-header">
+                            <h3>Registered Users</h3>
+                            <div class="panel-actions">
+                                <div class="search-input-wrapper">
+                                    <i class="fas fa-search"></i>
+                                    <input type="text" id="userSearchInput" placeholder="Search user or email..." oninput="filterUsers()">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="admin-table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Username</th>
+                                        <th>Email</th>
+                                        <th>Role</th>
+                                        <th>Registered Date</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="usersTableBody">
+                                    <tr><td colspan="6" class="empty-state"><i class="fas fa-spinner fa-spin"></i> Loading users...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal: Add / Edit Museum -->
+    <div class="modal-overlay" id="museumModal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3 id="museumModalTitle">Add New Museum</h3>
+                <button class="modal-close" onclick="closeMuseumModal()">&times;</button>
+            </div>
+            <form id="museumForm" onsubmit="handleMuseumFormSubmit(event)">
+                <div class="modal-body">
+                    <input type="hidden" id="museumId">
+
+                    <div class="form-group-admin">
+                        <label for="mName">Museum Name *</label>
+                        <input type="text" id="mName" required placeholder="e.g. National Museum, New Delhi">
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group-admin">
+                            <label for="mState">State *</label>
+                            <input type="text" id="mState" required placeholder="e.g. Delhi">
+                        </div>
+                        <div class="form-group-admin">
+                            <label for="mCity">City</label>
+                            <input type="text" id="mCity" placeholder="e.g. New Delhi">
+                        </div>
+                    </div>
+
+                    <div class="form-group-admin">
+                        <label for="mDesc">Description</label>
+                        <textarea id="mDesc" rows="3" placeholder="Brief museum details..."></textarea>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group-admin">
+                            <label for="mOpen">Opening Time</label>
+                            <input type="text" id="mOpen" value="09:00 AM" placeholder="09:00 AM">
+                        </div>
+                        <div class="form-group-admin">
+                            <label for="mClose">Closing Time</label>
+                            <input type="text" id="mClose" value="05:30 PM" placeholder="05:30 PM">
+                        </div>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group-admin">
+                            <label for="mAdult">Adult Price (₹) *</label>
+                            <input type="number" id="mAdult" step="0.01" value="150.00" required>
+                        </div>
+                        <div class="form-group-admin">
+                            <label for="mChild">Child Price (₹) *</label>
+                            <input type="number" id="mChild" step="0.01" value="75.00" required>
+                        </div>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group-admin">
+                            <label for="mSenior">Senior Price (₹) *</label>
+                            <input type="number" id="mSenior" step="0.01" value="100.00" required>
+                        </div>
+                        <div class="form-group-admin">
+                            <label for="mImage">Image Path / URL</label>
+                            <input type="text" id="mImage" value="assets/images/default.jpg" placeholder="assets/images/default.jpg">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn-secondary" onclick="closeMuseumModal()">Cancel</button>
+                    <button type="submit" class="btn-primary" id="saveMuseumBtn">Save Museum</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/api.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/admin.js"></script>
+</body>
+</html>

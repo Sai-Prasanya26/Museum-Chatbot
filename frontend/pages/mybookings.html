@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Bookings - Travel Explorer</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/homepage.css">
+    <link rel="stylesheet" href="/css/booking.css">
+    <link rel="stylesheet" href="/css/chatbot.css">
+</head>
+<body>
+    <!-- Navigation Header -->
+    <header>
+        <nav>
+            <div class="logo" onclick="window.location.href='/homepage.html'">
+                <i class="fas fa-om"></i>
+                Travel Explorer
+            </div>
+            <div class="nav-links">
+                <a href="/homepage.html">Home</a>
+                <a href="/museumpage.html">Museums</a>
+                <a href="/mybookings.html" class="active">My Bookings</a>
+                <a href="/ticket.html">Museum Assistant</a>
+                <div id="userNavSection">
+                    <a href="/login.html" class="auth-nav-btn">Login</a>
+                </div>
+                <select class="language-selector" aria-label="Select Language">
+                    <option value="en">English</option>
+                    <option value="hi">हिंदी</option>
+                    <option value="bn">বাংলা</option>
+                    <option value="te">తెలుగు</option>
+                    <option value="ta">தமிழ்</option>
+                </select>
+            </div>
+        </nav>
+    </header>
+
+    <div class="booking-page-wrap" style="max-width: 850px; margin-top: 100px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; flex-wrap: wrap; gap: 15px;">
+            <div>
+                <h1 style="color: #2c3e50; font-size: 2rem; margin-bottom: 4px;">
+                    <i class="fas fa-ticket-alt" style="color: #2962ff;"></i> My Museum Bookings
+                </h1>
+                <p style="color: #666; font-size: 0.95rem;">View your confirmed reservations, download tickets, or print receipts.</p>
+            </div>
+            <div>
+                <a href="/booking.html" class="print-btn" style="background-color: #2962ff; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
+                    <i class="fas fa-plus"></i> Book New Ticket
+                </a>
+            </div>
+        </div>
+
+        <!-- Bookings Container -->
+        <div id="bookingsContainer">
+            <div style="text-align: center; padding: 40px; background: white; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+                <i class="fas fa-spinner fa-spin fa-2x" style="color: #2962ff;"></i>
+                <p style="margin-top: 15px; color: #666;">Loading your ticket bookings...</p>
+            </div>
+        </div>
+
+        <!-- Receipt Modal for Printable View -->
+        <div id="receiptModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 10000; align-items: center; justify-content: center; padding: 20px;">
+            <div style="background: white; border-radius: 12px; max-width: 550px; width: 100%; padding: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); position: relative;">
+                <button onclick="closeReceiptModal()" style="position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 1.3rem; cursor: pointer; color: #666;">&times;</button>
+                <div class="receipt-header" style="background: #2962ff; color: white; padding: 12px; border-radius: 6px; text-align: center; margin-bottom: 15px;">
+                    <h3 style="margin: 0;"><i class="fas fa-ticket-alt"></i> Official Admission Ticket</h3>
+                </div>
+                <div id="modalReceiptContent" class="receipt-details" style="font-size: 0.95rem; line-height: 1.8;">
+                    <!-- filled dynamically -->
+                </div>
+                <div style="display: flex; gap: 10px; justify-content: center; margin-top: 20px;">
+                    <button class="print-btn" onclick="window.print()"><i class="fas fa-print"></i> Print Ticket</button>
+                    <button class="print-btn" onclick="closeReceiptModal()" style="background: #6c757d;">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/api.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/chatbot.js"></script>
+
+    <!-- My Bookings Script -->
+    <script>
+        var userBookings = [];
+
+        function getAuthToken() {
+            return (typeof API !== 'undefined' && API.getToken()) ||
+                localStorage.getItem('museum_token') ||
+                localStorage.getItem('token');
+        }
+
+        document.addEventListener('DOMContentLoaded', async function () {
+            var token = getAuthToken();
+
+            if (!token) {
+                document.getElementById('bookingsContainer').innerHTML = `
+                    <div style="text-align: center; padding: 40px; background: white; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+                        <i class="fas fa-lock fa-3x" style="color: #FF9933; margin-bottom: 15px;"></i>
+                        <h3 style="color: #2c3e50; margin-bottom: 10px;">Please Log In</h3>
+                        <p style="color: #666; margin-bottom: 20px;">You need to be logged in to view your bookings and past ticket history.</p>
+                        <a href="/login.html" class="print-btn" style="background: #2962ff; text-decoration: none; display: inline-block;">Log In Now</a>
+                    </div>
+                `;
+                return;
+            }
+
+            await fetchMyBookings(token);
+        });
+
+        async function fetchMyBookings(token) {
+            var container = document.getElementById('bookingsContainer');
+            try {
+                var res = await fetch('/api/bookings/my-bookings', {
+                    headers: { 'Authorization': 'Bearer ' + token }
+                });
+
+                if (res.status === 401) {
+                    if (typeof API !== 'undefined') {
+                        API.removeToken();
+                    } else {
+                        localStorage.removeItem('museum_token');
+                        localStorage.removeItem('token');
+                        localStorage.removeItem('museum_user');
+                        localStorage.removeItem('user');
+                    }
+                    window.location.href = '/login.html';
+                    return;
+                }
+
+                var data = await res.json();
+                userBookings = data.data || [];
+
+                if (userBookings.length === 0) {
+                    container.innerHTML = `
+                        <div style="text-align: center; padding: 50px 20px; background: white; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+                            <i class="fas fa-ticket-alt fa-3x" style="color: #cbd5e1; margin-bottom: 15px;"></i>
+                            <h3 style="color: #2c3e50; margin-bottom: 10px;">No Bookings Found</h3>
+                            <p style="color: #666; margin-bottom: 20px;">You haven't made any ticket reservations yet.</p>
+                            <a href="/museumpage.html" class="print-btn" style="background: #2962ff; text-decoration: none; display: inline-block;">
+                                Explore Museums & Book
+                            </a>
+                        </div>
+                    `;
+                    return;
+                }
+
+                container.innerHTML = userBookings.map(function (b) {
+                    var isConfirmed = b.booking_status === 'CONFIRMED';
+                    var statusColor = isConfirmed ? '#28a745' : '#dc3545';
+                    var totalVisitors = (b.adult_count || 0) + (b.child_count || 0) + (b.senior_count || 0);
+
+                    return `
+                        <div class="booking-container" style="margin-bottom: 20px; padding: 25px; border-left: 5px solid ${statusColor};">
+                            <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 10px;">
+                                <div>
+                                    <h3 style="color: #2c3e50; font-size: 1.3rem; margin-bottom: 6px;">
+                                        🏛️ ${b.museum_name || 'Museum'}
+                                    </h3>
+                                    <p style="color: #666; font-size: 0.9rem; margin-bottom: 8px;">
+                                        📍 ${b.city ? b.city + ', ' : ''}${b.state || ''}
+                                    </p>
+                                    <p style="font-family: monospace; font-size: 0.95rem; color: #2962ff; font-weight: bold;">
+                                        Reference: ${b.booking_reference}
+                                    </p>
+                                </div>
+                                <div style="text-align: right;">
+                                    <span style="display: inline-block; padding: 5px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: bold; background: ${isConfirmed ? '#d4edda' : '#f8d7da'}; color: ${statusColor};">
+                                        ${b.booking_status}
+                                    </span>
+                                    <div style="font-size: 1.3rem; font-weight: bold; color: #2c3e50; margin-top: 8px;">
+                                        ₹${b.total_price}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr style="border: 0; border-top: 1px solid #eee; margin: 15px 0;">
+
+                            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+                                <div style="font-size: 0.9rem; color: #555;">
+                                    <div><strong>Date of Visit:</strong> ${b.visit_date}</div>
+                                    <div><strong>Visitors (${totalVisitors}):</strong> Adults: ${b.adult_count || 0}, Children: ${b.child_count || 0}, Seniors: ${b.senior_count || 0}</div>
+                                </div>
+                                <div style="display: flex; gap: 10px;">
+                                    <button onclick="viewReceipt(${b.id})" class="print-btn" style="padding: 8px 16px; font-size: 0.9rem; background: #2962ff;">
+                                        <i class="fas fa-print"></i> Receipt
+                                    </button>
+                                    ${isConfirmed ? `
+                                        <button onclick="cancelBooking(${b.id})" style="padding: 8px 16px; font-size: 0.9rem; background: #fff; color: #dc3545; border: 1px solid #dc3545; border-radius: 4px; cursor: pointer; font-weight: bold;">
+                                            <i class="fas fa-times"></i> Cancel
+                                        </button>
+                                    ` : ''}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+
+            } catch (err) {
+                console.error('Error fetching bookings:', err);
+                container.innerHTML = `
+                    <div style="text-align: center; padding: 40px; background: white; border-radius: 10px;">
+                        <p style="color: #dc3545;">Error loading bookings. Please refresh or try again later.</p>
+                    </div>
+                `;
+            }
+        }
+
+        function viewReceipt(bookingId) {
+            var b = userBookings.find(function (item) { return item.id === bookingId; });
+            if (!b) return;
+
+            var modal = document.getElementById('receiptModal');
+            var content = document.getElementById('modalReceiptContent');
+
+            content.innerHTML = `
+                <p><strong>Place:</strong> ${b.museum_name || 'Museum'}</p>
+                <p><strong>Location:</strong> ${b.city ? b.city + ', ' : ''}${b.state || ''}</p>
+                <p><strong>Booking Reference:</strong> <span style="color: #2962ff; font-weight: bold; font-family: monospace;">${b.booking_reference}</span></p>
+                <p><strong>Date of Visit:</strong> ${b.visit_date}</p>
+                <p><strong>Adult Visitors:</strong> ${b.adult_count || 0}</p>
+                <p><strong>Child Visitors:</strong> ${b.child_count || 0}</p>
+                <p><strong>Senior Visitors:</strong> ${b.senior_count || 0}</p>
+                <p><strong>Total Amount Paid:</strong> <span style="font-weight: bold; color: #27ae60;">₹${b.total_price}</span></p>
+                <p><strong>Status:</strong> <span style="color: ${b.booking_status === 'CONFIRMED' ? '#28a745' : '#dc3545'}; font-weight: bold;">${b.booking_status}</span></p>
+            `;
+
+            modal.style.display = 'flex';
+        }
+
+        function closeReceiptModal() {
+            document.getElementById('receiptModal').style.display = 'none';
+        }
+
+        async function cancelBooking(bookingId) {
+            if (!confirm('Are you sure you want to cancel this booking?')) return;
+
+            var token = getAuthToken();
+            try {
+                var res = await fetch('/api/bookings/' + bookingId + '/cancel', {
+                    method: 'PATCH',
+                    headers: { 'Authorization': 'Bearer ' + token }
+                });
+                var data = await res.json();
+                if (data.success) {
+                    alert('Booking cancelled successfully.');
+                    await fetchMyBookings(token);
+                } else {
+                    alert(data.message || 'Unable to cancel booking.');
+                }
+            } catch (err) {
+                console.error('Cancellation error:', err);
+                alert('Server error cancelling booking.');
+            }
+        }
+    </script>
+</body>
+</html>

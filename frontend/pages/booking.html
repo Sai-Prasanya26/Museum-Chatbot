@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Museum Ticket Booking & Payment - Travel Explorer</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/homepage.css">
+    <link rel="stylesheet" href="/css/booking.css">
+    <link rel="stylesheet" href="/css/chatbot.css">
+    <style>
+        .status-badge-custom {
+            display: inline-block;
+            padding: 6px 18px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+        .status-pending {
+            background-color: #fef3c7;
+            color: #92400e;
+            border: 1.5px solid #f59e0b;
+        }
+        .status-processing {
+            background-color: #dbeafe;
+            color: #1e40af;
+            border: 1.5px solid #3b82f6;
+        }
+        .status-verified {
+            background-color: #dcfce7;
+            color: #166534;
+            border: 1.5px solid #22c55e;
+        }
+        .status-failed {
+            background-color: #fee2e2;
+            color: #991b1b;
+            border: 1.5px solid #ef4444;
+        }
+        .summary-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 16px 20px;
+            margin-bottom: 20px;
+        }
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 0;
+            font-size: 0.95rem;
+            border-bottom: 1px dashed #e2e8f0;
+        }
+        .summary-row:last-child {
+            border-bottom: none;
+        }
+        .upi-qr-card {
+            background: #ffffff;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+            margin: 20px 0;
+        }
+        .copy-upi-btn {
+            background: #eff6ff;
+            color: #1d4ed8;
+            border: 1px solid #bfdbfe;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-left: 8px;
+            transition: all 0.2s ease;
+        }
+        .copy-upi-btn:hover {
+            background: #dbeafe;
+        }
+        .btn-proceed {
+            width: 100%;
+            padding: 15px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.15rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        .btn-proceed:hover {
+            background: #1d4ed8;
+        }
+        .btn-verify {
+            width: 100%;
+            padding: 15px;
+            background: #16a34a;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.15rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        .btn-verify:hover {
+            background: #15803d;
+        }
+        .btn-verify:disabled {
+            background: #94a3b8;
+            cursor: not-allowed;
+        }
+        .important-notice {
+            background: #fffbeb;
+            border: 1px solid #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 14px 18px;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            color: #92400e;
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .step-pill-wrapper {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 25px;
+        }
+        .step-pill {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #94a3b8;
+        }
+        .step-pill.active {
+            color: #2563eb;
+        }
+        .step-pill.completed {
+            color: #16a34a;
+        }
+        .step-circle {
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #e2e8f0;
+            color: #64748b;
+            font-size: 0.8rem;
+        }
+        .step-pill.active .step-circle {
+            background: #2563eb;
+            color: #ffffff;
+        }
+        .step-pill.completed .step-circle {
+            background: #16a34a;
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Header -->
+    <header>
+        <nav>
+            <div class="logo" onclick="window.location.href='/homepage.html'" style="cursor: pointer;">
+                <i class="fas fa-om"></i>
+                Travel Explorer
+            </div>
+            <div class="nav-links">
+                <a href="/homepage.html">Home</a>
+                <a href="/museumpage.html">Museums</a>
+                <a href="/mybookings.html">My Bookings</a>
+                <a href="/ticket.html">Museum Assistant</a>
+                <div id="userNavSection">
+                    <a href="/login.html" class="auth-nav-btn">Login</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="booking-page-wrap" style="margin-top: 90px;">
+
+        <!-- Step Indicator -->
+        <div class="step-pill-wrapper">
+            <div class="step-pill active" id="stepPill1">
+                <span class="step-circle" id="stepCircle1">1</span>
+                <span>Select Tickets</span>
+            </div>
+            <div class="step-pill" id="stepPill2">
+                <span class="step-circle" id="stepCircle2">2</span>
+                <span>UPI Payment</span>
+            </div>
+            <div class="step-pill" id="stepPill3">
+                <span class="step-circle" id="stepCircle3">3</span>
+                <span>Confirmed Ticket</span>
+            </div>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- STEP 1: TICKET SELECTION & VISITOR DETAILS -->
+        <!-- ========================================== -->
+        <div id="bookingFormSection" class="booking-container">
+            <h1 id="bookingHeading"><span id="museumNameDisplay">Museum</span> - Ticket Booking</h1>
+
+            <!-- Museum Selector -->
+            <div class="form-row">
+                <label for="museumSelect"><i class="fas fa-landmark"></i> Select Museum:</label>
+                <select id="museumSelect" style="width: 100%; padding: 12px; border-radius: 6px; border: 1.5px solid #cbd5e1; font-size: 1rem;">
+                    <option value="">Loading museums from database...</option>
+                </select>
+                <small id="museumMetaInfo" style="color: #64748b; display: block; margin-top: 6px; font-size: 0.9rem;"></small>
+            </div>
+
+            <!-- Date Selection -->
+            <div class="form-row">
+                <label for="visitDate"><i class="fas fa-calendar-alt"></i> Select Date of Visit:</label>
+                <input type="date" id="visitDate" required style="width: 100%; padding: 12px; border-radius: 6px; border: 1.5px solid #cbd5e1; font-size: 1rem;">
+            </div>
+
+            <!-- Visitor Controls -->
+            <div class="visitor-control">
+                <label>Adult Visitors (₹<span id="adultPriceDisplay">150</span> each):</label>
+                <div class="counter-group">
+                    <button type="button" onclick="updateVisitors('adult', -1)">-</button>
+                    <input type="text" id="adultCount" value="1" readonly>
+                    <button type="button" onclick="updateVisitors('adult', 1)">+</button>
+                </div>
+            </div>
+
+            <div class="visitor-control">
+                <label>Child Visitors (₹<span id="childPriceDisplay">75</span> each):</label>
+                <div class="counter-group">
+                    <button type="button" onclick="updateVisitors('child', -1)">-</button>
+                    <input type="text" id="childCount" value="0" readonly>
+                    <button type="button" onclick="updateVisitors('child', 1)">+</button>
+                </div>
+            </div>
+
+            <div class="visitor-control">
+                <label>Senior Visitors (₹<span id="seniorPriceDisplay">100</span> each):</label>
+                <div class="counter-group">
+                    <button type="button" onclick="updateVisitors('senior', -1)">-</button>
+                    <input type="text" id="seniorCount" value="0" readonly>
+                    <button type="button" onclick="updateVisitors('senior', 1)">+</button>
+                </div>
+            </div>
+
+            <!-- Visitor Contact Info -->
+            <div style="margin-top: 25px; padding-top: 20px; border-top: 1px solid #e2e8f0;">
+                <h3 style="margin-bottom: 15px; color: #1e293b; font-size: 1.15rem;"><i class="fas fa-user-check"></i> Primary Visitor Details</h3>
+                <div class="form-row">
+                    <label for="visitorName"><i class="fas fa-user"></i> Full Name:</label>
+                    <input type="text" id="visitorName" placeholder="Enter visitor's full name" required style="width: 100%; padding: 12px; border-radius: 6px; border: 1.5px solid #cbd5e1; font-size: 1rem;">
+                </div>
+                <div class="form-row">
+                    <label for="visitorEmail"><i class="fas fa-envelope"></i> Email for Ticket & Receipt:</label>
+                    <input type="email" id="visitorEmail" placeholder="yourname@example.com" required style="width: 100%; padding: 12px; border-radius: 6px; border: 1.5px solid #cbd5e1; font-size: 1rem;">
+                    <small style="color: #64748b; margin-top: 4px; display: block;">Confirmed booking pass and PDF receipt will be dispatched to this email.</small>
+                </div>
+                <div class="form-row">
+                    <label for="visitorPhone"><i class="fas fa-phone-alt"></i> Mobile Phone (Optional):</label>
+                    <input type="tel" id="visitorPhone" placeholder="e.g. 9876543210 (for WhatsApp/SMS updates)" style="width: 100%; padding: 12px; border-radius: 6px; border: 1.5px solid #cbd5e1; font-size: 1rem;">
+                </div>
+            </div>
+
+            <!-- Total Price Display -->
+            <div id="totalPrice" style="font-size: 1.4rem; font-weight: bold; color: #1e3a8a; margin: 25px 0 20px; padding: 14px; background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px; text-align: center;">
+                Total Amount: ₹150
+            </div>
+
+            <button type="button" id="proceedToPayBtn" class="btn-proceed" onclick="proceedToPayment()">
+                <i class="fas fa-arrow-right"></i> Book Tickets & Proceed to UPI Payment
+            </button>
+            <div id="formValidationMsg" style="text-align: center; margin-top: 10px; color: #dc2626; font-weight: 600;"></div>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- STEP 2: UPI PAYMENT PAGE (UPI-ONLY)        -->
+        <!-- ========================================== -->
+        <div id="paymentSection" class="booking-container" style="display: none;">
+            <h1 id="paymentHeading"><span id="payMuseumNameDisplay">Museum</span> - Booking & Payment</h1>
+
+            <!-- Customer & Order Summary -->
+            <div class="summary-card">
+                <div class="summary-row">
+                    <span style="color: #64748b;">Customer Name:</span>
+                    <strong id="payCustomerName" style="color: #0f172a;">--</strong>
+                </div>
+                <div class="summary-row">
+                    <span style="color: #64748b;">Customer Email:</span>
+                    <strong id="payCustomerEmail" style="color: #0f172a;">--</strong>
+                </div>
+                <div class="summary-row" id="payPhoneRow" style="display: none;">
+                    <span style="color: #64748b;">Phone Number:</span>
+                    <strong id="payCustomerPhone" style="color: #0f172a;">--</strong>
+                </div>
+                <div class="summary-row">
+                    <span style="color: #64748b;">Date of Visit:</span>
+                    <strong id="payVisitDate" style="color: #2563eb;">--</strong>
+                </div>
+                <div class="summary-row">
+                    <span style="color: #64748b;">Visitors Breakdown:</span>
+                    <strong id="payVisitorsSummary" style="color: #0f172a;">--</strong>
+                </div>
+                <div class="summary-row" style="padding-top: 10px; margin-top: 5px; font-size: 1.15rem;">
+                    <span style="font-weight: bold; color: #0f172a;">Total Amount:</span>
+                    <strong id="payTotalAmount" style="color: #16a34a; font-size: 1.3rem;">₹0</strong>
+                </div>
+            </div>
+
+            <!-- UPI Payment Section -->
+            <div class="upi-qr-card">
+                <div style="display: inline-flex; align-items: center; gap: 8px; font-size: 1.25rem; font-weight: bold; color: #1e3a8a; margin-bottom: 6px;">
+                    <i class="fas fa-qrcode"></i> UPI PAYMENT
+                </div>
+                <p style="color: #475569; font-size: 0.95rem; margin-bottom: 16px;">
+                    Scan the QR code with any UPI app to pay (GPay, PhonePe, Paytm, BHIM, Cred)
+                </p>
+
+                <div style="background: #f8fafc; border: 1px solid #e2e8f0; display: inline-block; padding: 12px; border-radius: 12px; margin-bottom: 15px;">
+                    <img id="upiQrImg" src="/images/scanner.png" alt="UPI QR Code" style="width: 220px; height: 220px; object-fit: contain; display: block; border-radius: 8px;" onerror="this.src='/assets/images/scanner.png';">
+                </div>
+
+                <div style="font-size: 1rem; color: #1e293b; margin: 10px 0 15px;">
+                    UPI ID: <strong id="configuredUpiIdDisplay" style="color: #1e3a8a; font-family: monospace; font-size: 1.1rem;">museums.tickets@icici</strong>
+                    <button type="button" class="copy-upi-btn" onclick="copyUpiId()"><i class="far fa-copy"></i> Copy</button>
+                </div>
+
+                <!-- Payment Status Indicator -->
+                <div style="margin: 20px 0 15px; padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
+                    <div style="font-size: 0.85rem; color: #64748b; font-weight: bold; text-transform: uppercase; margin-bottom: 6px;">Payment Status</div>
+                    <span id="paymentStatusBadge" class="status-badge-custom status-pending">PENDING</span>
+                </div>
+
+                <!-- UPI Transaction Reference / UTR Input -->
+                <div style="text-align: left; margin-top: 25px; padding: 18px; background: #fdfefe; border: 1.5px solid #cbd5e1; border-radius: 8px;">
+                    <label for="upiTxnIdInput" style="display: block; font-weight: 700; color: #0f172a; margin-bottom: 6px;">
+                        <i class="fas fa-receipt"></i> Enter UPI Transaction Reference / UTR Number:
+                    </label>
+                    <input type="text" id="upiTxnIdInput" placeholder="e.g. 428912345678 (12-digit UTR)" maxlength="40" style="width: 100%; padding: 12px 14px; border: 2px solid #94a3b8; border-radius: 6px; font-size: 1.05rem; font-family: monospace; letter-spacing: 1px;">
+                    <small style="color: #64748b; display: block; margin-top: 6px; line-height: 1.4;">
+                        Complete the transfer in your UPI app, then copy and paste the 12-digit UTR / UPI Reference ID here to verify.
+                    </small>
+                </div>
+
+                <div id="paymentStatusMsg" style="margin-top: 15px; font-weight: 600; min-height: 24px;"></div>
+
+                <button type="button" id="verifyPaymentBtn" class="btn-verify" onclick="verifyAndConfirmPayment()" style="margin-top: 15px;">
+                    <i class="fas fa-shield-alt"></i> Verify Payment & Confirm Booking
+                </button>
+
+                <button type="button" onclick="backToBookingForm()" style="width: 100%; margin-top: 12px; padding: 10px; background: transparent; border: 1px solid #cbd5e1; border-radius: 6px; color: #475569; font-weight: 600; cursor: pointer;">
+                    <i class="fas fa-arrow-left"></i> Change Visitors / Date
+                </button>
+
+                <div class="important-notice">
+                    <i class="fas fa-exclamation-triangle" style="font-size: 1.3rem;"></i>
+                    <span><strong>Important:</strong> Your booking will be confirmed only after successful payment verification.</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- STEP 3: BOOKING CONFIRMATION RECEIPT       -->
+        <!-- ========================================== -->
+        <div id="receiptSection" class="receipt" style="display: none;">
+            <div class="receipt-header" style="text-align: center; border-bottom: 2px solid #f1f5f9; padding-bottom: 15px;">
+                <div style="display: inline-flex; align-items: center; justify-content: center; width: 60px; height: 60px; background: #dcfce7; color: #16a34a; border-radius: 50%; font-size: 2rem; margin-bottom: 12px;">
+                    <i class="fas fa-check"></i>
+                </div>
+                <h2 style="color: #15803d; margin-bottom: 6px;">Booking Confirmed Successfully</h2>
+                <p style="color: #64748b; font-size: 0.95rem;">Official e-ticket and payment receipt generated</p>
+            </div>
+
+            <div id="emailNoticeBanner" style="margin: 18px 0; padding: 12px 16px; background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 6px; color: #1e40af; font-size: 0.92rem; display: flex; align-items: center; gap: 10px;">
+                <i class="fas fa-envelope-open-text" style="font-size: 1.2rem;"></i>
+                <span>A confirmation email with your digital ticket receipt has been sent to <strong id="receiptEmailNotice">your email</strong>.</span>
+            </div>
+
+            <div class="receipt-details" style="margin-top: 20px;">
+                <div class="summary-card" style="background: #ffffff; border: 1.5px solid #cbd5e1;">
+                    <p style="margin-bottom: 10px;"><strong>Museum:</strong> <span id="receiptPlace">--</span></p>
+                    <p style="margin-bottom: 10px;"><strong>Location:</strong> <span id="receiptLocation">--</span></p>
+                    <p style="margin-bottom: 10px;"><strong>Visitor Name:</strong> <span id="receiptVisitorName">--</span></p>
+                    <p style="margin-bottom: 10px;"><strong>Email:</strong> <span id="receiptVisitorEmail">--</span></p>
+                    <p style="margin-bottom: 10px;" id="receiptPhoneRow"><strong>Phone:</strong> <span id="receiptVisitorPhone">--</span></p>
+                    <p style="margin-bottom: 10px;"><strong>Official Booking ID:</strong> <span id="bookingId" style="font-family: monospace; font-weight: bold; color: #1e3a8a; font-size: 1.2rem;">--</span></p>
+                    <p style="margin-bottom: 10px;"><strong>Date of Visit:</strong> <span id="receiptDate" style="color: #2563eb; font-weight: 600;">--</span></p>
+                    <p style="margin-bottom: 8px;"><strong>Adult Visitors:</strong> <span id="receiptAdults">0</span></p>
+                    <p style="margin-bottom: 8px;"><strong>Child Visitors:</strong> <span id="receiptChildren">0</span></p>
+                    <p style="margin-bottom: 8px;"><strong>Senior Visitors:</strong> <span id="receiptSeniors">0</span></p>
+                    <p style="margin-bottom: 10px;"><strong>Total Visitors:</strong> <strong id="receiptTotalVisitors">0</strong></p>
+                    <p style="margin-bottom: 10px;"><strong>Payment Method:</strong> <span>UPI</span></p>
+                    <p style="margin-bottom: 10px;"><strong>UPI Transaction Reference:</strong> <code id="receiptTxnRef" style="color: #0f172a; font-weight: bold;">--</code></p>
+                    <p style="margin-bottom: 10px;"><strong>Total Amount Paid:</strong> <span id="receiptTotal" style="font-weight: bold; color: #16a34a; font-size: 1.25rem;">₹0</span></p>
+                    <p style="margin-bottom: 10px;"><strong>Payment Status:</strong> <span style="color: #16a34a; font-weight: bold; background: #dcfce7; padding: 3px 10px; border-radius: 12px;">PAID / VERIFIED</span></p>
+                    <p style="margin-bottom: 0;"><strong>Booked On:</strong> <span id="receiptBookedOn">--</span></p>
+                </div>
+            </div>
+
+            <!-- Ticket Action Buttons -->
+            <div style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 25px;">
+                <button class="print-btn" onclick="printReceipt()" style="background-color: #0f172a; padding: 12px 20px;">
+                    <i class="fas fa-print"></i> Print Receipt
+                </button>
+                <a id="downloadPdfBtn" href="#" target="_blank" class="print-btn" style="background-color: #16a34a; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; padding: 12px 20px;">
+                    <i class="fas fa-file-pdf" style="margin-right: 6px;"></i> Download PDF Ticket
+                </a>
+                <a href="/mybookings.html" class="print-btn" style="background-color: #2563eb; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; padding: 12px 20px;">
+                    <i class="fas fa-list" style="margin-right: 6px;"></i> View All My Bookings
+                </a>
+            </div>
+
+            <div style="text-align: center; margin-top: 20px;">
+                <button type="button" onclick="resetToNewBooking()" style="background: transparent; border: none; color: #2563eb; text-decoration: underline; cursor: pointer; font-size: 0.95rem;">
+                    Book tickets for another museum
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/api.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/chatbot.js"></script>
+
+    <!-- Authoritative Booking & Payment Logic -->
+    <script>
+        var PRICES = {
+            adult: 150,
+            child: 75,
+            senior: 100
+        };
+
+        var adultCount = 1;
+        var childCount = 0;
+        var seniorCount = 0;
+        var totalAmount = 150;
+        var selectedMuseumData = null;
+        var allMuseums = [];
+        var activePaymentIntent = null;
+        var confirmedBookingData = null;
+        var configuredUpiConfig = {
+            upi_id: 'museums.tickets@icici',
+            qr_image: '/images/scanner.png',
+            merchant_name: 'Museum Explorer Tickets'
+        };
+
+        document.addEventListener('DOMContentLoaded', async function () {
+            // Set min visit date to today
+            var today = new Date().toISOString().split('T')[0];
+            var dateInput = document.getElementById('visitDate');
+            dateInput.min = today;
+            dateInput.value = today;
+
+            // Load UPI configuration from backend
+            await loadPaymentConfig();
+
+            // Pre-fill user data if logged in
+            var user = (typeof API !== 'undefined' && API.getUser && API.getUser()) ||
+                       JSON.parse(localStorage.getItem('museum_user') || localStorage.getItem('user') || 'null');
+            if (user) {
+                if (document.getElementById('visitorEmail')) {
+                    document.getElementById('visitorEmail').value = user.email || '';
+                }
+                if (document.getElementById('visitorName')) {
+                    document.getElementById('visitorName').value = user.username || user.name || '';
+                }
+                if (document.getElementById('visitorPhone') && user.phone) {
+                    document.getElementById('visitorPhone').value = user.phone;
+                }
+            }
+
+            // Load museums from MySQL backend
+            await loadMuseums();
+        });
+
+        async function loadPaymentConfig() {
+            try {
+                var res = await fetch('/api/payments/config');
+                var data = await res.json();
+                if (data.success && data.data) {
+                    configuredUpiConfig = data.data;
+                    var upiIdElem = document.getElementById('configuredUpiIdDisplay');
+                    if (upiIdElem && configuredUpiConfig.upi_id) {
+                        upiIdElem.textContent = configuredUpiConfig.upi_id;
+                    }
+                    var qrImgElem = document.getElementById('upiQrImg');
+                    if (qrImgElem && configuredUpiConfig.qr_image) {
+                        qrImgElem.src = configuredUpiConfig.qr_image;
+                    }
+                }
+            } catch (err) {
+                console.warn('Could not fetch live payment config, using defaults:', err);
+            }
+        }
+
+        async function loadMuseums() {
+            try {
+                var response = await fetch('/api/museums');
+                var res = await response.json();
+                allMuseums = Array.isArray(res) ? res : (res.data || []);
+
+                var select = document.getElementById('museumSelect');
+                select.innerHTML = '';
+
+                allMuseums.forEach(function (m) {
+                    var opt = document.createElement('option');
+                    opt.value = m.id;
+                    opt.textContent = m.name + ' (' + (m.city ? m.city + ', ' : '') + m.state + ')';
+                    select.appendChild(opt);
+                });
+
+                // Check URL params for preselected museum
+                var params = new URLSearchParams(window.location.search);
+                var targetId = params.get('museum_id') || params.get('id');
+                var targetName = params.get('museum') || params.get('name');
+
+                if (targetId) {
+                    select.value = targetId;
+                } else if (targetName) {
+                    var match = allMuseums.find(function (m) {
+                        return m.name.toLowerCase().includes(targetName.toLowerCase());
+                    });
+                    if (match) select.value = match.id;
+                }
+
+                select.addEventListener('change', function () {
+                    onMuseumChanged(select.value);
+                });
+
+                // Initial selection
+                onMuseumChanged(select.value || (allMuseums[0] ? allMuseums[0].id : null));
+
+            } catch (err) {
+                console.error('Error fetching museums:', err);
+            }
+        }
+
+        function onMuseumChanged(museumId) {
+            selectedMuseumData = allMuseums.find(function (m) { return m.id == museumId; });
+            if (selectedMuseumData) {
+                document.getElementById('museumNameDisplay').textContent = selectedMuseumData.name;
+                document.getElementById('payMuseumNameDisplay').textContent = selectedMuseumData.name;
+                document.getElementById('museumMetaInfo').textContent =
+                    '📍 ' + (selectedMuseumData.city ? selectedMuseumData.city + ', ' : '') + selectedMuseumData.state +
+                    ' | ⏰ ' + (selectedMuseumData.opening_time || '09:00 AM') + ' - ' + (selectedMuseumData.closing_time || '05:30 PM');
+
+                PRICES.adult = parseFloat(selectedMuseumData.adult_price || 150);
+                PRICES.child = parseFloat(selectedMuseumData.child_price || 75);
+                PRICES.senior = parseFloat(selectedMuseumData.senior_price || 100);
+
+                document.getElementById('adultPriceDisplay').textContent = PRICES.adult;
+                document.getElementById('childPriceDisplay').textContent = PRICES.child;
+                document.getElementById('seniorPriceDisplay').textContent = PRICES.senior;
+
+                calculateTotal();
+            }
+        }
+
+        function updateVisitors(type, change) {
+            if (type === 'adult') {
+                adultCount = Math.max(0, adultCount + change);
+                document.getElementById('adultCount').value = adultCount;
+            } else if (type === 'child') {
+                childCount = Math.max(0, childCount + change);
+                document.getElementById('childCount').value = childCount;
+            } else if (type === 'senior') {
+                seniorCount = Math.max(0, seniorCount + change);
+                document.getElementById('seniorCount').value = seniorCount;
+            }
+            calculateTotal();
+        }
+
+        function calculateTotal() {
+            var adultTotal = adultCount * PRICES.adult;
+            var childTotal = childCount * PRICES.child;
+            var seniorTotal = seniorCount * PRICES.senior;
+
+            totalAmount = adultTotal + childTotal + seniorTotal;
+            document.getElementById('totalPrice').innerText = 'Total Amount: ₹' + totalAmount;
+            var btnTotal = document.getElementById('btnTotalDisplay');
+            if (btnTotal) btnTotal.textContent = totalAmount;
+        }
+
+        /**
+         * Step 1 -> Step 2: Validate inputs and transition to UPI Payment page
+         */
+        async function proceedToPayment() {
+            var date = document.getElementById('visitDate').value;
+            var email = document.getElementById('visitorEmail').value.trim();
+            var name = document.getElementById('visitorName').value.trim();
+            var phone = document.getElementById('visitorPhone').value.trim();
+            var validationDiv = document.getElementById('formValidationMsg');
+            validationDiv.textContent = '';
+
+            if (!date) {
+                validationDiv.textContent = 'Please select a date of visit.';
+                document.getElementById('visitDate').focus();
+                return;
+            }
+
+            var totalVisitors = adultCount + childCount + seniorCount;
+            if (totalVisitors < 1) {
+                validationDiv.textContent = 'Please select at least one visitor ticket.';
+                return;
+            }
+
+            if (!email || !email.includes('@')) {
+                validationDiv.textContent = 'Please enter a valid email address for your ticket confirmation.';
+                document.getElementById('visitorEmail').focus();
+                return;
+            }
+
+            if (!name) {
+                validationDiv.textContent = 'Please enter visitor full name.';
+                document.getElementById('visitorName').focus();
+                return;
+            }
+
+            var proceedBtn = document.getElementById('proceedToPayBtn');
+            proceedBtn.disabled = true;
+            proceedBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Preparing Payment...';
+
+            try {
+                // Call backend payment initiate endpoint to authoritatively prepare payment session
+                var payload = {
+                    museum_id: selectedMuseumData ? selectedMuseumData.id : 1,
+                    visit_date: date,
+                    adult_count: adultCount,
+                    child_count: childCount,
+                    senior_count: seniorCount,
+                    visitor_name: name,
+                    visitor_email: email,
+                    visitor_phone: phone
+                };
+
+                var res = await fetch('/api/payments/initiate', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                var data = await res.json();
+                proceedBtn.disabled = false;
+                proceedBtn.innerHTML = '<i class="fas fa-arrow-right"></i> Book Tickets & Proceed to UPI Payment';
+
+                if (!data.success || !data.data) {
+                    validationDiv.textContent = data.message || 'Unable to initiate payment session. Please try again.';
+                    return;
+                }
+
+                activePaymentIntent = data.data;
+
+                // Populate Step 2 (UPI Payment Page)
+                document.getElementById('payCustomerName').textContent = activePaymentIntent.visitor_name;
+                document.getElementById('payCustomerEmail').textContent = activePaymentIntent.visitor_email;
+                if (activePaymentIntent.visitor_phone) {
+                    document.getElementById('payCustomerPhone').textContent = activePaymentIntent.visitor_phone;
+                    document.getElementById('payPhoneRow').style.display = 'flex';
+                } else {
+                    document.getElementById('payPhoneRow').style.display = 'none';
+                }
+
+                document.getElementById('payVisitDate').textContent = activePaymentIntent.visit_date;
+
+                var breakdownArr = [];
+                if (adultCount > 0) breakdownArr.push(adultCount + ' Adult(s)');
+                if (childCount > 0) breakdownArr.push(childCount + ' Child(ren)');
+                if (seniorCount > 0) breakdownArr.push(seniorCount + ' Senior(s)');
+                document.getElementById('payVisitorsSummary').textContent = breakdownArr.join(', ') + ' (' + totalVisitors + ' total)';
+
+                document.getElementById('payTotalAmount').textContent = '₹' + activePaymentIntent.total_amount;
+                document.getElementById('configuredUpiIdDisplay').textContent = activePaymentIntent.upi_id || configuredUpiConfig.upi_id;
+
+                var qrImg = document.getElementById('upiQrImg');
+                if (qrImg && (activePaymentIntent.qr_image || configuredUpiConfig.qr_image)) {
+                    qrImg.src = activePaymentIntent.qr_image || configuredUpiConfig.qr_image;
+                }
+
+                // Reset payment status badge to PENDING
+                setPaymentStatus('PENDING');
+                document.getElementById('paymentStatusMsg').textContent = '';
+                document.getElementById('upiTxnIdInput').value = '';
+
+                // Switch UI views
+                document.getElementById('bookingFormSection').style.display = 'none';
+                document.getElementById('paymentSection').style.display = 'block';
+                document.getElementById('receiptSection').style.display = 'none';
+
+                // Update Step Indicator
+                setStepIndicator(2);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            } catch (err) {
+                console.error('Error initiating payment:', err);
+                proceedBtn.disabled = false;
+                proceedBtn.innerHTML = '<i class="fas fa-arrow-right"></i> Book Tickets & Proceed to UPI Payment';
+                validationDiv.textContent = 'Network or server error initiating payment. Please try again.';
+            }
+        }
+
+        function backToBookingForm() {
+            document.getElementById('paymentSection').style.display = 'none';
+            document.getElementById('bookingFormSection').style.display = 'block';
+            setStepIndicator(1);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        /**
+         * Step 2 -> Step 3: Authoritative Payment Verification & Booking Creation
+         */
+        async function verifyAndConfirmPayment() {
+            var txnIdInput = document.getElementById('upiTxnIdInput');
+            var txnId = txnIdInput.value.trim();
+            var msgDiv = document.getElementById('paymentStatusMsg');
+            var btn = document.getElementById('verifyPaymentBtn');
+
+            // Requirement 3 & 4 & 16 (TEST 1): User clicks confirm without payment
+            if (!txnId) {
+                setPaymentStatus('PENDING');
+                msgDiv.style.color = '#dc2626';
+                msgDiv.textContent = 'Payment has not been verified. Please complete the UPI payment before confirming your booking.';
+                txnIdInput.focus();
+                return;
+            }
+
+            // Update UI status to PROCESSING
+            setPaymentStatus('PAYMENT PROCESSING');
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Verifying Payment with Banking Network...';
+            msgDiv.style.color = '#2563eb';
+            msgDiv.textContent = 'Verifying UPI transaction with authoritative backend...';
+
+            try {
+                var token = (typeof API !== 'undefined' && API.getToken && API.getToken()) ||
+                            localStorage.getItem('museum_token') || localStorage.getItem('token');
+                var headers = { 'Content-Type': 'application/json' };
+                if (token) {
+                    headers['Authorization'] = 'Bearer ' + token;
+                }
+
+                var payload = {
+                    payment_intent_id: activePaymentIntent ? activePaymentIntent.payment_intent_id : null,
+                    transaction_id: txnId,
+                    museum_id: selectedMuseumData ? selectedMuseumData.id : 1,
+                    visit_date: document.getElementById('visitDate').value,
+                    adult_count: adultCount,
+                    child_count: childCount,
+                    senior_count: seniorCount,
+                    visitor_name: document.getElementById('visitorName').value.trim(),
+                    visitor_email: document.getElementById('visitorEmail').value.trim(),
+                    visitor_phone: document.getElementById('visitorPhone').value.trim()
+                };
+
+                var res = await fetch('/api/payments/verify', {
+                    method: 'POST',
+                    headers: headers,
+                    body: JSON.stringify(payload)
+                });
+
+                var data = await res.json();
+
+                if (data.success && data.data) {
+                    // PAYMENT VERIFIED & SUCCESSFUL!
+                    setPaymentStatus('PAYMENT VERIFIED');
+                    confirmedBookingData = data.data;
+
+                    msgDiv.style.color = '#16a34a';
+                    msgDiv.textContent = 'Payment verified successfully! Generating your ticket...';
+
+                    setTimeout(function () {
+                        displayConfirmedReceipt(confirmedBookingData);
+                    }, 600);
+
+                } else {
+                    // PAYMENT FAILED OR PENDING
+                    btn.disabled = false;
+                    btn.innerHTML = '<i class="fas fa-shield-alt"></i> Verify Payment & Confirm Booking';
+
+                    if (data.payment_status === 'PENDING' || (data.message && data.message.includes('pending'))) {
+                        setPaymentStatus('PENDING');
+                        msgDiv.style.color = '#d97706';
+                        msgDiv.textContent = data.message || 'Payment is still pending. Please complete the payment and try again.';
+                    } else {
+                        setPaymentStatus('PAYMENT FAILED');
+                        msgDiv.style.color = '#dc2626';
+                        msgDiv.textContent = data.message || 'Payment could not be verified. Your booking has not been confirmed.';
+                    }
+                }
+
+            } catch (err) {
+                console.error('Payment verification request failed:', err);
+                setPaymentStatus('PAYMENT FAILED');
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fas fa-shield-alt"></i> Verify Payment & Confirm Booking';
+                msgDiv.style.color = '#dc2626';
+                msgDiv.textContent = 'Payment verification request failed. Please check your network and try again.';
+            }
+        }
+
+        /**
+         * Step 3: Render Confirmed Ticket Receipt
+         */
+        function displayConfirmedReceipt(booking) {
+            document.getElementById('paymentSection').style.display = 'none';
+            document.getElementById('bookingFormSection').style.display = 'none';
+            document.getElementById('receiptSection').style.display = 'block';
+
+            document.getElementById('receiptPlace').textContent = booking.museum_name || (selectedMuseumData ? selectedMuseumData.name : 'Museum');
+            document.getElementById('receiptLocation').textContent = (booking.museum_city ? booking.museum_city + ', ' : '') + (booking.museum_state || '');
+            document.getElementById('receiptVisitorName').textContent = booking.visitor_name || booking.username || 'Visitor';
+            document.getElementById('receiptVisitorEmail').textContent = booking.visitor_email || booking.email || '--';
+            document.getElementById('receiptEmailNotice').textContent = booking.visitor_email || booking.email || 'your email';
+
+            if (booking.visitor_phone) {
+                document.getElementById('receiptVisitorPhone').textContent = booking.visitor_phone;
+                document.getElementById('receiptPhoneRow').style.display = 'block';
+            } else {
+                document.getElementById('receiptPhoneRow').style.display = 'none';
+            }
+
+            document.getElementById('bookingId').textContent = booking.booking_reference;
+            document.getElementById('receiptDate').textContent = booking.visit_date;
+            document.getElementById('receiptAdults').textContent = booking.adult_count;
+            document.getElementById('receiptChildren').textContent = booking.child_count;
+            document.getElementById('receiptSeniors').textContent = booking.senior_count;
+            var totalVis = (parseInt(booking.adult_count, 10) || 0) + (parseInt(booking.child_count, 10) || 0) + (parseInt(booking.senior_count, 10) || 0);
+            document.getElementById('receiptTotalVisitors').textContent = totalVis;
+
+            document.getElementById('receiptTxnRef').textContent = booking.transaction_id || booking.transaction_reference || 'N/A';
+            document.getElementById('receiptTotal').textContent = '₹' + parseFloat(booking.total_price || 0).toFixed(2);
+
+            var bookedOnDate = booking.created_at ? new Date(booking.created_at).toLocaleString('en-IN') : new Date().toLocaleString('en-IN');
+            document.getElementById('receiptBookedOn').textContent = bookedOnDate;
+
+            // Link PDF ticket download button
+            var pdfBtn = document.getElementById('downloadPdfBtn');
+            if (pdfBtn) {
+                pdfBtn.href = '/api/bookings/reference/' + encodeURIComponent(booking.booking_reference) + '/pdf';
+            }
+
+            setStepIndicator(3);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function setPaymentStatus(state) {
+            var badge = document.getElementById('paymentStatusBadge');
+            if (!badge) return;
+
+            badge.className = 'status-badge-custom';
+            if (state === 'PENDING') {
+                badge.classList.add('status-pending');
+                badge.textContent = 'Pending Payment';
+            } else if (state === 'PAYMENT PROCESSING') {
+                badge.classList.add('status-processing');
+                badge.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+            } else if (state === 'PAYMENT VERIFIED') {
+                badge.classList.add('status-verified');
+                badge.innerHTML = '<i class="fas fa-check-circle"></i> Payment Verified';
+            } else if (state === 'PAYMENT FAILED') {
+                badge.classList.add('status-failed');
+                badge.innerHTML = '<i class="fas fa-times-circle"></i> Payment Failed';
+            }
+        }
+
+        function setStepIndicator(stepNumber) {
+            for (var i = 1; i <= 3; i++) {
+                var pill = document.getElementById('stepPill' + i);
+                var circle = document.getElementById('stepCircle' + i);
+                if (!pill || !circle) continue;
+
+                pill.className = 'step-pill';
+                if (i < stepNumber) {
+                    pill.classList.add('completed');
+                    circle.innerHTML = '<i class="fas fa-check"></i>';
+                } else if (i === stepNumber) {
+                    pill.classList.add('active');
+                    circle.textContent = i;
+                } else {
+                    circle.textContent = i;
+                }
+            }
+        }
+
+        function copyUpiId() {
+            var upiId = document.getElementById('configuredUpiIdDisplay').textContent;
+            navigator.clipboard.writeText(upiId).then(function () {
+                alert('UPI ID copied to clipboard: ' + upiId);
+            }).catch(function () {
+                prompt('Copy this UPI ID:', upiId);
+            });
+        }
+
+        function printReceipt() {
+            window.print();
+        }
+
+        function resetToNewBooking() {
+            activePaymentIntent = null;
+            confirmedBookingData = null;
+            document.getElementById('receiptSection').style.display = 'none';
+            document.getElementById('paymentSection').style.display = 'none';
+            document.getElementById('bookingFormSection').style.display = 'block';
+            setStepIndicator(1);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

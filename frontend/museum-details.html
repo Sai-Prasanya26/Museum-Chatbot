@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Museum Details - Travel Explorer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/museums.css">
+    <link rel="stylesheet" href="/css/museum-details.css">
+    <link rel="stylesheet" href="/css/chatbot.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="site-header">
+        <nav class="site-nav">
+            <div class="nav-left">
+                <a href="/homepage.html" class="logo">
+                    <i class="fas fa-om"></i>
+                    <span>Travel Explorer</span>
+                </a>
+            </div>
+            <div class="nav-right">
+                <div class="nav-links" id="navLinks">
+                    <a href="/homepage.html">Home</a>
+                    <a href="/museumpage.html" class="active">Museums</a>
+                    <a href="/mybookings.html" id="myBookingsNav">My Bookings</a>
+                    <a href="/ticket.html" id="museumAssistantNav">Museum Assistant</a>
+                </div>
+                <div id="userNavSection">
+                    <div class="profile-dropdown" id="profileDropdown">
+                        <button class="profile-btn" id="profileDropdownBtn" onclick="toggleProfileDropdown(event)" aria-haspopup="true" aria-expanded="false" title="Account Menu">
+                            <i class="fas fa-user-circle"></i>
+                            <span class="user-name-text">Sai</span>
+                            <i class="fas fa-chevron-down dropdown-arrow"></i>
+                        </button>
+                        <div id="dropdownMenu" class="dropdown-menu">
+                            <a href="/mybookings.html" class="dropdown-item"><i class="fas fa-ticket-alt"></i> My Bookings</a>
+                            <hr class="dropdown-divider">
+                            <a href="#" onclick="handleLogout(event)" class="dropdown-item logout-item"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                        </div>
+                    </div>
+                </div>
+                <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Toggle Navigation Menu" onclick="toggleMobileNav(event)">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Container -->
+    <main class="museum-details-main">
+        <div class="museum-details-container">
+
+            <!-- Subtle Breadcrumb Navigation -->
+            <nav class="museum-breadcrumb" aria-label="Breadcrumb">
+                <a href="/homepage.html">Home</a>
+                <i class="fa-solid fa-chevron-right breadcrumb-separator" aria-hidden="true"></i>
+                <a href="/museumpage.html">Museums</a>
+                <i class="fa-solid fa-chevron-right breadcrumb-separator" aria-hidden="true"></i>
+                <span id="breadcrumbTitle" class="breadcrumb-current">Museum Details</span>
+            </nav>
+
+            <!-- Dynamic Museum Detail Container: Injected by museum-details.js -->
+            <div id="museumDetailContainer">
+                <div class="museum-loading-state">
+                    <i class="fa-solid fa-circle-notch fa-spin fa-2x"></i>
+                    <p>Loading museum details from database...</p>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content footer-container">
+            <div class="footer-section footer-col">
+                <div class="logo" style="margin-bottom: 0.8rem;">
+                    <i class="fas fa-om" style="color: #FF9933;"></i>
+                    <span style="color: #FF9933; font-weight: 700;">Travel Explorer</span>
+                </div>
+                <p>
+                    Connecting travelers with magnificent museums and state cultural treasures across India.
+                </p>
+            </div>
+
+            <div class="footer-section footer-col">
+                <h3>Explore</h3>
+                <ul class="footer-links">
+                    <li><a href="/homepage.html">Home</a></li>
+                    <li><a href="/museumpage.html">All Museums</a></li>
+                    <li><a href="/ticket.html">Museum Assistant</a></li>
+                    <li><a href="/mybookings.html">My Bookings</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section footer-col">
+                <h3>Booking Policy</h3>
+                <ul class="footer-links">
+                    <li><a href="javascript:void(0)">Ticket Validity Rules</a></li>
+                    <li><a href="javascript:void(0)">Cancellation & Refunds</a></li>
+                    <li><a href="javascript:void(0)">Visitor Guidelines</a></li>
+                    <li><a href="javascript:void(0)">Photography Permissions</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section footer-col">
+                <h3>Helpdesk</h3>
+                <p>
+                    Questions about your visit or timings? Reach out anytime via our interactive assistant or email us at support@travelexplorer.in.
+                </p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2026 Travel Explorer. All Rights Reserved. Powered by Node.js, Express & MySQL.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="/js/api.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/museum-categories.js"></script>
+    <script src="/js/museum-details.js"></script>
+    <script src="/js/chatbot.js"></script>
+</body>
+</html>

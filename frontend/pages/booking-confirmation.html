@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Confirmation - Museum Explorer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/booking.css">
+    <link rel="stylesheet" href="/css/chatbot.css">
+    <style>
+        .confirmation-card {
+            max-width: 680px;
+            margin: 2rem auto;
+            background: #ffffff;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-md);
+            overflow: hidden;
+        }
+
+        .success-banner {
+            background: linear-gradient(135deg, #16a34a, #15803d);
+            color: #ffffff;
+            padding: 2.5rem 2rem;
+            text-align: center;
+        }
+
+        .success-banner i.icon {
+            font-size: 3.5rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .success-banner h1 {
+            font-size: 1.8rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .success-banner p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        .ticket-details-body {
+            padding: 2rem;
+        }
+
+        .ticket-reference-tag {
+            background: #f0fdf4;
+            border: 1.5px dashed #22c55e;
+            padding: 1rem;
+            border-radius: var(--radius-sm);
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .ticket-reference-tag .ref-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #166534;
+            font-weight: 700;
+        }
+
+        .ticket-reference-tag .ref-val {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #14532d;
+            letter-spacing: 2px;
+            margin-top: 4px;
+        }
+
+        .ticket-info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .ticket-field {
+            font-size: 0.9rem;
+        }
+
+        .ticket-field span {
+            display: block;
+            color: var(--text-muted);
+            margin-bottom: 3px;
+        }
+
+        .ticket-field strong {
+            font-size: 1rem;
+            color: var(--text-dark);
+        }
+
+        .qr-pass-section {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.2rem;
+            background: #f8fafc;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border);
+            margin-bottom: 2rem;
+        }
+
+        .qr-pass-section img {
+            width: 90px;
+            height: 90px;
+            object-fit: contain;
+            border: 1px solid var(--border);
+            padding: 4px;
+            background: #ffffff;
+            border-radius: 6px;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        @media print {
+            header, footer, .action-buttons, .step-nav {
+                display: none !important;
+            }
+            body {
+                background: #ffffff;
+            }
+            .confirmation-card {
+                box-shadow: none;
+                border: 2px solid #000;
+                margin: 0;
+                max-width: 100%;
+            }
+            .success-banner {
+                background: #16a34a !important;
+                color: #ffffff !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Navbar -->
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="/pages/homepage.html" class="logo">
+                <i class="fas fa-landmark"></i>
+                <span>Museum Explorer</span>
+            </a>
+            <div class="nav-links">
+                <a href="/pages/homepage.html">Home</a>
+                <a href="/pages/museums.html">Museums</a>
+                <a href="/pages/mybookings.html">My Bookings</a>
+            </div>
+            <div id="userNavSection" class="auth-buttons">
+                <!-- Managed by common.js -->
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="container" style="padding-top: 1.5rem; padding-bottom: 4rem;">
+
+        <!-- Step Indicator -->
+        <div class="step-nav" style="display: flex; justify-content: center; gap: 2rem; margin-bottom: 1.5rem;">
+            <div style="display: flex; align-items: center; gap: 0.5rem; font-weight: 500; color: #16a34a;">
+                <span style="width: 28px; height: 28px; background: #16a34a; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.85rem;"><i class="fas fa-check"></i></span>
+                <span>Select Tickets</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 0.5rem; font-weight: 500; color: #16a34a;">
+                <span style="width: 28px; height: 28px; background: #16a34a; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.85rem;"><i class="fas fa-check"></i></span>
+                <span>Payment</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 0.5rem; font-weight: 700; color: #16a34a;">
+                <span style="width: 28px; height: 28px; background: #16a34a; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.85rem;"><i class="fas fa-check-double"></i></span>
+                <span>Confirmed</span>
+            </div>
+        </div>
+
+        <div id="loadingState" style="text-align: center; padding: 4rem 1rem;">
+            <i class="fas fa-spinner fa-spin fa-2x" style="color: var(--primary);"></i>
+            <p style="margin-top: 1rem; color: var(--text-muted);">Fetching your ticket confirmation...</p>
+        </div>
+
+        <!-- Ticket Card -->
+        <div id="ticketCard" class="confirmation-card" style="display: none;">
+            <div class="success-banner">
+                <i class="fas fa-check-circle icon"></i>
+                <h1>Booking Confirmed!</h1>
+                <p>Your official museum entry pass has been generated successfully.</p>
+            </div>
+
+            <div class="ticket-details-body">
+                <div class="ticket-reference-tag">
+                    <div class="ref-label">Official Booking Reference</div>
+                    <div class="ref-val" id="ticketRef">MUS-2026-XXXX</div>
+                    <div style="font-size: 0.8rem; color: #166534; margin-top: 4px;">Present this code or QR at the museum entrance</div>
+                </div>
+
+                <div class="ticket-info-grid">
+                    <div class="ticket-field">
+                        <span>Museum</span>
+                        <strong id="ticketMuseum">--</strong>
+                    </div>
+                    <div class="ticket-field">
+                        <span>Location</span>
+                        <strong id="ticketLocation">--</strong>
+                    </div>
+                    <div class="ticket-field">
+                        <span>Date of Visit</span>
+                        <strong id="ticketDate" style="color: var(--primary);">--</strong>
+                    </div>
+                    <div class="ticket-field">
+                        <span>Visitors</span>
+                        <strong id="ticketVisitors">--</strong>
+                    </div>
+                    <div class="ticket-field">
+                        <span>Total Paid</span>
+                        <strong id="ticketTotal" style="color: #16a34a; font-size: 1.15rem;">₹0</strong>
+                    </div>
+                    <div class="ticket-field">
+                        <span>Payment Method</span>
+                        <strong id="ticketPaymentMethod">UPI</strong>
+                    </div>
+                    <div class="ticket-field">
+                        <span>Booking Status</span>
+                        <span class="status-badge status-CONFIRMED" id="ticketStatus" style="display: inline-block;">CONFIRMED</span>
+                    </div>
+                    <div class="ticket-field">
+                        <span>Booked On</span>
+                        <strong id="ticketBookedOn">--</strong>
+                    </div>
+                    <div class="ticket-field" id="ticketTxnRow" style="grid-column: 1 / -1;">
+                        <span>Transaction ID</span>
+                        <code id="ticketTxnRef" style="color: var(--text-dark);">TXN-XXXX</code>
+                    </div>
+                </div>
+
+                <div class="qr-pass-section">
+                    <div>
+                        <h4 style="color: var(--text-dark); margin-bottom: 0.2rem;"><i class="fas fa-qrcode"></i> Digital Gate Pass</h4>
+                        <p style="font-size: 0.82rem; color: var(--text-muted); margin: 0;">Scan at turnstile or security counter for swift entry</p>
+                    </div>
+                    <img src="/images/scanner.png" alt="Entry QR Pass" onerror="this.src='/assets/images/scanner.png';">
+                </div>
+
+                <div class="action-buttons" style="display: flex; flex-wrap: wrap; gap: 0.8rem;">
+                    <button id="printTicketBtn" class="btn btn-outline" style="flex: 1; min-width: 140px;">
+                        <i class="fas fa-print"></i> Print Receipt
+                    </button>
+                    <a id="downloadPdfBtn" href="#" target="_blank" class="btn btn-outline" style="flex: 1; min-width: 160px; text-align: center; color: #16a34a; border-color: #16a34a;">
+                        <i class="fas fa-file-pdf"></i> Download PDF Ticket
+                    </a>
+                    <a href="/pages/mybookings.html" class="btn btn-primary" style="flex: 1; min-width: 140px; text-align: center;">
+                        <i class="fas fa-ticket-alt"></i> My Bookings
+                    </a>
+                </div>
+
+                <div style="text-align: center; margin-top: 1.2rem;">
+                    <a href="/pages/museums.html" style="font-size: 0.9rem; color: var(--primary); text-decoration: none;">
+                        <i class="fas fa-arrow-left"></i> Book tickets for another museum
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-col">
+                <div class="logo" style="color: #ffffff; margin-bottom: 0.8rem;">
+                    <i class="fas fa-landmark" style="color: var(--primary);"></i>
+                    <span>Museum Explorer</span>
+                </div>
+                <p style="color: #94a3b8; font-size: 0.9rem; line-height: 1.6;">
+                    Verified digital booking confirmation backed by live MySQL transactions.
+                </p>
+            </div>
+            <div class="footer-col">
+                <h4>Explore</h4>
+                <ul class="footer-links">
+                    <li><a href="/pages/homepage.html">Home</a></li>
+                    <li><a href="/pages/museums.html">All Museums</a></li>
+                    <li><a href="/pages/mybookings.html">My Bookings</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Assistance</h4>
+                <p style="color: #94a3b8; font-size: 0.88rem; line-height: 1.6;">
+                    Need changes to your ticket? Visit "My Bookings" to manage or cancel your pass according to museum policies.
+                </p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Museum Explorer. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="/js/api.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/confirmation.js"></script>
+</body>
+</html>

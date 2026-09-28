@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Explorer - Museum Ticket Booking</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/homepage.css">
+    <link rel="stylesheet" href="/css/chatbot.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="site-header">
+        <nav class="site-nav">
+            <div class="nav-left">
+                <a href="/homepage.html" class="logo">
+                    <i class="fas fa-om"></i>
+                    <span>Travel Explorer</span>
+                </a>
+            </div>
+            <div class="nav-right">
+                <div class="nav-links" id="navLinks">
+                    <a href="/homepage.html" class="active">Home</a>
+                    <a href="/museumpage.html">Museums</a>
+                    <a href="/mybookings.html" id="myBookingsNav">My Bookings</a>
+                    <a href="/ticket.html" id="museumAssistantNav">Museum Assistant</a>
+                </div>
+                <div id="userNavSection">
+                    <div class="profile-dropdown" id="profileDropdown">
+                        <button class="profile-btn" id="profileDropdownBtn" onclick="toggleProfileDropdown(event)" aria-haspopup="true" aria-expanded="false" title="Account Menu">
+                            <i class="fas fa-user-circle"></i>
+                            <span class="user-name-text">Sai</span>
+                            <i class="fas fa-chevron-down dropdown-arrow"></i>
+                        </button>
+                        <div id="dropdownMenu" class="dropdown-menu">
+                            <a href="/mybookings.html" class="dropdown-item"><i class="fas fa-ticket-alt"></i> My Bookings</a>
+                            <hr class="dropdown-divider">
+                            <a href="#" onclick="handleLogout(event)" class="dropdown-item logout-item"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                        </div>
+                    </div>
+                </div>
+                <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Toggle Navigation Menu" onclick="toggleMobileNav(event)">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="heroCarousel" aria-label="Featured Museums Carousel">
+        <!-- Slide 1: National Museum -->
+        <div class="hero-slide active" data-slide="0">
+            <img src="/assets/images/museums/national-museum.jpg" alt="National Museum, New Delhi" class="slide-img">
+            <div class="hero-overlay"></div>
+        </div>
+
+        <!-- Slide 2: Indian Museum -->
+        <div class="hero-slide" data-slide="1">
+            <img src="/assets/images/museums/indian-museum.jpg" alt="Indian Museum, Kolkata" class="slide-img">
+            <div class="hero-overlay"></div>
+        </div>
+
+        <!-- Slide 3: Salar Jung Museum -->
+        <div class="hero-slide" data-slide="2">
+            <img src="/assets/images/museums/salar-jung-museum.jpg" alt="Salar Jung Museum, Hyderabad" class="slide-img">
+            <div class="hero-overlay"></div>
+        </div>
+
+        <!-- Slide 4: Chhatrapati Shivaji Maharaj Vastu Sangrahalaya (CSMVS) -->
+        <div class="hero-slide" data-slide="3">
+            <img src="/assets/images/museums/chhatrapati-shivaji-maharaj-vastu-sangrahalaya.jpg" alt="Chhatrapati Shivaji Maharaj Vastu Sangrahalaya, Mumbai" class="slide-img">
+            <div class="hero-overlay"></div>
+        </div>
+
+        <!-- Central Hero Content: Retained Headline & Search Box -->
+        <div class="hero-content">
+            <h1>Discover India's Rich Museum Heritage</h1>
+            <p>Explore India's museums, discover remarkable collections, and book your visit with ease.</p>
+            <form id="heroSearchForm" class="search-bar">
+                <input type="text" id="heroSearchInput" placeholder="Search museums, cities, or states..." aria-label="Search museums, cities, or states">
+                <button type="submit"><i class="fas fa-search"></i> Search</button>
+            </form>
+        </div>
+
+        <!-- Slide Indicators -->
+        <div class="slide-indicators">
+            <button class="indicator active" aria-label="Slide 1: National Museum" onclick="goToSlide(0)"></button>
+            <button class="indicator" aria-label="Slide 2: Indian Museum" onclick="goToSlide(1)"></button>
+            <button class="indicator" aria-label="Slide 3: Salar Jung Museum" onclick="goToSlide(2)"></button>
+            <button class="indicator" aria-label="Slide 4: CSMVS" onclick="goToSlide(3)"></button>
+        </div>
+    </section>
+
+    <!-- Explore Museums Across India Section -->
+    <section class="categories">
+        <h2 class="section-title">Explore Museums Across India</h2>
+        <p class="section-subtitle">Discover diverse collections across specialized categories, traditions, and historical periods</p>
+        <div class="category-grid">
+            <a href="/museumpage.html?category=art-culture" class="category-item">
+                <i class="fas fa-palette fa-3x" style="color: #ea580c;"></i>
+                <h3>Art & Culture</h3>
+                <p>Discover timeless paintings, classical sculptures, textiles, and rich traditional crafts.</p>
+            </a>
+            <a href="/museumpage.html?category=history-heritage" class="category-item">
+                <i class="fas fa-landmark fa-3x" style="color: #db2777;"></i>
+                <h3>History & Heritage</h3>
+                <p>Explore ancient royal regalia, weaponry, numismatics, and India's legendary freedom struggle.</p>
+            </a>
+            <a href="/museumpage.html?category=science-technology" class="category-item">
+                <i class="fas fa-flask fa-3x" style="color: #2563eb;"></i>
+                <h3>Science & Technology</h3>
+                <p>Interactive galleries, planetariums, space exploration, natural sciences, and technological innovation.</p>
+            </a>
+            <a href="/museumpage.html?category=archaeology" class="category-item">
+                <i class="fas fa-archway fa-3x" style="color: #059669;"></i>
+                <h3>Archaeology</h3>
+                <p>Excavated relics, prehistoric antiquities, Indus Valley treasures, and architectural remnants.</p>
+            </a>
+        </div>
+    </section>
+
+    <!-- Featured Museums Section -->
+    <section class="featured-section">
+        <h2 class="section-title">Featured Museums</h2>
+        <p class="section-subtitle">Handpicked national treasures and acclaimed galleries ready for your visit</p>
+        <div id="featuredMuseumsGrid" class="featured-grid">
+            <!-- Dynamically populated from MySQL via API.museums.getAll({ limit: 6 }) -->
+        </div>
+        <div class="view-all-container">
+            <a href="/museumpage.html" class="btn-view-all">
+                <span>Explore More Museums</span>
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Why Visit Museums Section -->
+    <section class="why-visit-section">
+        <h2 class="section-title">Why Visit Museums?</h2>
+        <p class="section-subtitle">Immerse yourself in authentic stories, preservation, and cultural enlightenment</p>
+        <div class="benefits-grid">
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <i class="fas fa-landmark"></i>
+                </div>
+                <h3>Discover History</h3>
+                <p>Step back in time to explore centuries of dynastic traditions, civilizational achievements, and momentous events.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <i class="fas fa-paint-brush"></i>
+                </div>
+                <h3>Explore Art & Culture</h3>
+                <p>Experience classical Indian fine arts, intricate miniature paintings, tribal artifacts, and preserved masterpieces.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <i class="fas fa-lightbulb"></i>
+                </div>
+                <h3>Learn Something New</h3>
+                <p>Interactive educational exhibits and curated galleries designed to spark wonder for learners of all generations.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <i class="fas fa-ticket-alt"></i>
+                </div>
+                <h3>Easy Online Booking</h3>
+                <p>Skip long ticket queues with guaranteed instant digital reservations, verified entries, and transparent pricing.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Museum Assistant CTA Section -->
+    <section class="assistant-section">
+        <div class="assistant-card">
+            <div class="assistant-text">
+                <div class="assistant-badge"><i class="fas fa-robot"></i> 24/7 AI Guide</div>
+                <h2>Plan Your Visit with Museum Assistant</h2>
+                <p>Have questions about ticket prices, visiting hours, or museum exhibits? Our intelligent Museum Assistant (QBOT) is ready to help 24/7.</p>
+            </div>
+            <div class="assistant-action">
+                <a href="/ticket.html" class="btn-assistant">
+                    <i class="fas fa-robot"></i> Ask Museum Assistant
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About Us</h3>
+                <p>Travel Explorer is India's dedicated museum discovery and digital ticket booking platform, connecting travelers to 180+ verified state and national heritage museums.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="/homepage.html">Home</a></li>
+                    <li><a href="/museumpage.html">Museums</a></li>
+                    <li><a href="/mybookings.html">My Bookings</a></li>
+                    <li><a href="/ticket.html">Museum Assistant</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact & Support</h3>
+                <p>Email: support@heritageindia.com</p>
+                <p>Phone: +91 1800 200 4567</p>
+                <p>Operating Hours: Mon - Sun, 9:00 AM - 6:00 PM</p>
+            </div>
+        </div>
+        <p>&copy; 2026 Travel Explorer - Museum Discovery & Ticket Booking System. All Rights Reserved. Powered by Node.js & MySQL.</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="/js/api.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/homepage.js"></script>
+    <script src="/js/chatbot.js"></script>
+</body>
+</html>

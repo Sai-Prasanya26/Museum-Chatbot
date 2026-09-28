@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Museum Assistant (QBOT) - Travel Explorer</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/homepage.css">
+    <link rel="stylesheet" href="/css/chatbot.css">
+</head>
+<body class="chatbot-standalone-page">
+    <!-- Navigation Header -->
+    <header>
+        <nav>
+            <div class="logo" onclick="window.location.href='/homepage.html'">
+                <i class="fas fa-om"></i>
+                Travel Explorer
+            </div>
+            <div class="nav-links">
+                <a href="/homepage.html">Home</a>
+                <a href="/museumpage.html">Museums</a>
+                <a href="/mybookings.html">My Bookings</a>
+                <a href="/ticket.html" class="active">Museum Assistant</a>
+                <div id="userNavSection">
+                    <a href="/login.html" class="auth-nav-btn">Login</a>
+                </div>
+                <select class="language-selector" aria-label="Select Language">
+                    <option value="en">English</option>
+                    <option value="hi">हिंदी</option>
+                    <option value="bn">বাংলা</option>
+                    <option value="te">తెలుగు</option>
+                    <option value="ta">தமிழ்</option>
+                </select>
+            </div>
+        </nav>
+    </header>
+
+    <div style="text-align: center; margin: 90px auto 1rem; max-width: 650px; padding: 0 15px;">
+        <h2 style="color: #2962ff; margin-bottom: 0.3rem;"><i class="fas fa-robot"></i> QBOT Museum Assistant</h2>
+        <p style="color: #666; font-size: 0.95rem;">Ask about museum timings, explore collections, check prices, and book tickets instantly.</p>
+    </div>
+
+    <div id="chatbot">
+        <div class="chat-header">
+            <h3><i class="fas fa-robot"></i> QBOT</h3>
+            <button class="close-btn" style="display:none;"><i class="fas fa-times"></i></button>
+        </div>
+        <div id="chat-messages"></div>
+        <div id="user-input-container">
+            <input type="text" id="user-input" placeholder="Type your message here...">
+            <button id="send-btn"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/api.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/chatbot.js"></script>
+</body>
+</html>

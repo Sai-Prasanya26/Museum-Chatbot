@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Famous Museums in India - Travel Explorer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/homepage.css">
+    <link rel="stylesheet" href="/css/museums.css">
+    <link rel="stylesheet" href="/css/chatbot.css">
+</head>
+<body>
+
+    <!-- Site Navigation -->
+    <header class="site-nav">
+        <nav>
+            <a href="/homepage.html" class="logo">
+                <i class="fas fa-om"></i>
+                Travel Explorer
+            </a>
+            <div class="nav-links">
+                <a href="/homepage.html">Home</a>
+                <a href="/museumpage.html" class="active">Museums</a>
+                <a href="/mybookings.html">My Bookings</a>
+                <a href="/ticket.html">Museum Assistant</a>
+                <div id="userNavSection">
+                    <a href="/login.html" class="auth-nav-btn">Login</a>
+                </div>
+                <select class="language-selector" aria-label="Select Language">
+                    <option value="en">English</option>
+                    <option value="hi">हिंदी</option>
+                    <option value="bn">বাংলা</option>
+                    <option value="te">తెలుగు</option>
+                    <option value="ta">தமிழ்</option>
+                </select>
+            </div>
+        </nav>
+    </header>
+
+    <div class="main-content-wrap">
+        <div class="page-header">
+            <h1>Famous Museums in India</h1>
+            <p>Discover India's Rich Cultural Heritage Through its Magnificent Museums</p>
+        </div>
+
+        <div class="search-container">
+            <input type="text" id="museumSearchInput" class="search-box" placeholder="Search museums by name, location, or description..." aria-label="Search museums">
+            <select id="stateFilterSelect" class="state-select" aria-label="Filter by state">
+                <option value="">All States & Territories</option>
+            </select>
+        </div>
+
+        <div id="noResultsBox" class="no-results">
+            <h2>No museums found</h2>
+            <p>Try adjusting your search terms, clearing the category, or selecting a different state.</p>
+        </div>
+
+        <div id="museumGrid" class="museum-grid">
+            <!-- Dynamically populated from MySQL via API.museums.getAll() -->
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/api.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/museum-categories.js"></script>
+    <script src="/js/museums.js"></script>
+    <script src="/js/chatbot.js"></script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!-- Root shortcut to pages/register.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account - Travel Explorer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/auth.css">
+    <link rel="stylesheet" href="/css/chatbot.css">
+</head>
+<body>
+
+    <div class="background-gradient"></div>
+    <div class="circle circle-1"></div>
+    <div class="circle circle-2"></div>
+    <div class="circle circle-3"></div>
+
+    <div class="main-container">
+        <div id="signup" class="container">
+            <div class="header">
+                <h1>Create Account</h1>
+                <p>Join us on your next adventure</p>
+            </div>
+
+            <div id="signUpMessage" class="messageDiv"></div>
+
+            <form id="registerForm">
+                <div class="form-group">
+                    <input type="text" id="username" placeholder="Username" required autocomplete="username">
+                    <div id="usernameError" class="error"></div>
+                </div>
+
+                <div class="form-group">
+                    <input type="email" id="email" placeholder="Email" required autocomplete="email">
+                    <div id="emailError" class="error"></div>
+                </div>
+
+                <div class="form-group">
+                    <input type="password" id="password" placeholder="Password" required autocomplete="new-password">
+                    <div id="passwordError" class="error"></div>
+                </div>
+
+                <button type="submit" id="submitSignUp">Sign Up</button>
+            </form>
+
+            <div class="signup-link">
+                Already have an account?
+                <a href="/pages/login.html" class="text-btn">Log in</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/api.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/auth.js"></script>
+    <script src="/js/chatbot.js"></script>
+</body>
+</html>

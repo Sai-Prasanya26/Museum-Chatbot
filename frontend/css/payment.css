@@ -1,0 +1,146 @@
+/* ==========================================================
+   Museum Booking System - Payment Checkout Styling
+   ========================================================== */
+
+.payment-layout {
+    max-width: 800px;
+    margin: 2rem auto;
+    background: #ffffff;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+}
+
+.payment-header {
+    background: #ffffff;
+    padding: 2rem 2rem 1.5rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.payment-header h1 {
+    font-size: 1.6rem;
+    color: var(--text-dark);
+    margin-bottom: 0.3rem;
+}
+
+.payment-header p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+.payment-body {
+    padding: 2rem;
+}
+
+/* Method Selector Tabs */
+.method-tabs {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.method-tab {
+    flex: 1;
+    padding: 1rem;
+    border: 2px solid var(--border);
+    border-radius: var(--radius-md);
+    background: #ffffff;
+    cursor: pointer;
+    text-align: center;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    transition: var(--transition);
+}
+
+.method-tab:hover {
+    border-color: var(--primary);
+}
+
+.method-tab.active {
+    border-color: var(--primary);
+    background: #fff7ed;
+    color: var(--primary);
+}
+
+/* UPI Section */
+.upi-section {
+    text-align: center;
+    padding: 1.5rem 1rem;
+    background: #f8fafc;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border);
+    margin-bottom: 2rem;
+}
+
+.upi-section h3 {
+    font-size: 1.15rem;
+    color: var(--text-dark);
+    margin-bottom: 0.5rem;
+}
+
+.upi-section p {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+}
+
+.qr-code-box {
+    width: 220px;
+    height: 220px;
+    margin: 0 auto 1.5rem;
+    background: #ffffff;
+    border: 1px solid var(--border);
+    padding: 12px;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+}
+
+.qr-code-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.upi-id-input-group {
+    max-width: 380px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+/* Card Section */
+.card-section {
+    padding: 1.5rem;
+    background: #f8fafc;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border);
+    margin-bottom: 2rem;
+}
+
+.card-row-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.payment-amount-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem;
+    background: #f1f5f9;
+    border-radius: var(--radius-sm);
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.payment-amount-box span:last-child {
+    font-size: 1.4rem;
+    color: var(--accent);
+}

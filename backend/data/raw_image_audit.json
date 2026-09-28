@@ -1,0 +1,892 @@
+[
+  {
+    "id": 1,
+    "name": "Chhatrapati Shivaji Maharaj Vastu Sangrahalaya",
+    "state": "Maharashtra",
+    "city": "Mumbai",
+    "image": "assets/images/museums/chhatrapati-shivaji-maharaj-vastu-sangrahalaya.jpg",
+    "exists": true,
+    "size": 254214,
+    "format": "JPEG"
+  },
+  {
+    "id": 2,
+    "name": "Nehru Science Centre",
+    "state": "Maharashtra",
+    "city": "Mumbai",
+    "image": "assets/images/museums/nehru-science-centre.jpg",
+    "exists": true,
+    "size": 164702,
+    "format": "JPEG"
+  },
+  {
+    "id": 3,
+    "name": "Raja Dinkar Kelkar Museum",
+    "state": "Maharashtra",
+    "city": "Mumbai",
+    "image": "assets/images/museums/raja-dinkar-kelkar-museum.jpg",
+    "exists": true,
+    "size": 324078,
+    "format": "JPEG"
+  },
+  {
+    "id": 4,
+    "name": "Dr. Bhau Daji Lad Museum",
+    "state": "Maharashtra",
+    "city": "Mumbai",
+    "image": "assets/images/museums/dr-bhau-daji-lad-museum.jpg",
+    "exists": true,
+    "size": 248102,
+    "format": "JPEG"
+  },
+  {
+    "id": 5,
+    "name": "National Museum",
+    "state": "Delhi",
+    "city": "New Delhi",
+    "image": "assets/images/museums/national-museum.jpg",
+    "exists": true,
+    "size": 195005,
+    "format": "JPEG"
+  },
+  {
+    "id": 6,
+    "name": "National Gallery of Modern Art",
+    "state": "Delhi",
+    "city": "New Delhi",
+    "image": "assets/images/museums/national-gallery-of-modern-art.jpg",
+    "exists": true,
+    "size": 25401,
+    "format": "PNG"
+  },
+  {
+    "id": 7,
+    "name": "Gandhi Smriti",
+    "state": "Delhi",
+    "city": "New Delhi",
+    "image": "assets/images/museums/gandhi-smriti.jpg",
+    "exists": true,
+    "size": 270864,
+    "format": "JPEG"
+  },
+  {
+    "id": 8,
+    "name": "Government Museum, Chennai",
+    "state": "Tamil Nadu",
+    "city": "Chennai",
+    "image": "assets/images/museums/government-museum-chennai.jpg",
+    "exists": true,
+    "size": 272421,
+    "format": "JPEG"
+  },
+  {
+    "id": 9,
+    "name": "Vivekananda House",
+    "state": "Tamil Nadu",
+    "city": "Chennai",
+    "image": "assets/images/museums/vivekananda-house.jpg",
+    "exists": true,
+    "size": 134643,
+    "format": "JPEG"
+  },
+  {
+    "id": 10,
+    "name": "The Periyar Science and Technology Museum",
+    "state": "Tamil Nadu",
+    "city": "Chennai",
+    "image": "assets/images/museums/the-periyar-science-and-technology-museum.jpg",
+    "exists": true,
+    "size": 101816,
+    "format": "JPEG"
+  },
+  {
+    "id": 11,
+    "name": "Kamaraj Memorial House",
+    "state": "Tamil Nadu",
+    "city": "Chennai",
+    "image": "assets/images/museums/neutral-museum-heritage-2.jpg",
+    "exists": true,
+    "size": 2010,
+    "format": "HTML_ERROR"
+  },
+  {
+    "id": 12,
+    "name": "Indian Museum",
+    "state": "West Bengal",
+    "city": "Kolkata",
+    "image": "assets/images/museums/indian-museum.jpg",
+    "exists": true,
+    "size": 174690,
+    "format": "JPEG"
+  },
+  {
+    "id": 13,
+    "name": "Birla Industrial & Technological Museum",
+    "state": "West Bengal",
+    "city": "Kolkata",
+    "image": "assets/images/museums/birla-industrial-technological-museum.jpg",
+    "exists": true,
+    "size": 208423,
+    "format": "JPEG"
+  },
+  {
+    "id": 14,
+    "name": "Netaji Bhawan",
+    "state": "West Bengal",
+    "city": "Kolkata",
+    "image": "assets/images/museums/netaji-bhawan.jpg",
+    "exists": true,
+    "size": 37543,
+    "format": "JPEG"
+  },
+  {
+    "id": 15,
+    "name": "Karnataka Chitrakala Parishath",
+    "state": "Karnataka",
+    "city": "Bengaluru",
+    "image": "assets/images/museums/karnataka-chitrakala-parishath.jpg",
+    "exists": true,
+    "size": 311569,
+    "format": "JPEG"
+  },
+  {
+    "id": 16,
+    "name": "Visvesvaraya Industrial and Technological Museum",
+    "state": "Karnataka",
+    "city": "Bengaluru",
+    "image": "assets/images/museums/visvesvaraya-industrial-and-technological-museum.jpg",
+    "exists": true,
+    "size": 277058,
+    "format": "JPEG"
+  },
+  {
+    "id": 17,
+    "name": "Government Museum, Bengaluru",
+    "state": "Karnataka",
+    "city": "Bengaluru",
+    "image": "assets/images/museums/government-museum-bengaluru.jpg",
+    "exists": true,
+    "size": 233918,
+    "format": "JPEG"
+  },
+  {
+    "id": 18,
+    "name": "HAL Aerospace Museum",
+    "state": "Karnataka",
+    "city": "Bengaluru",
+    "image": "assets/images/museums/hal-aerospace-museum.jpg",
+    "exists": true,
+    "size": 313210,
+    "format": "JPEG"
+  },
+  {
+    "id": 19,
+    "name": "Albert Hall Museum",
+    "state": "Rajasthan",
+    "city": "Jaipur",
+    "image": "assets/images/museums/albert-hall-museum.jpg",
+    "exists": true,
+    "size": 258295,
+    "format": "JPEG"
+  },
+  {
+    "id": 20,
+    "name": "City Palace Museum, Jaipur",
+    "state": "Rajasthan",
+    "city": "Jaipur",
+    "image": "assets/images/museums/city-palace-jaipur.jpg",
+    "exists": true,
+    "size": 277549,
+    "format": "JPEG"
+  },
+  {
+    "id": 21,
+    "name": "Rajasthan State Museum",
+    "state": "Rajasthan",
+    "city": "Jaipur",
+    "image": "assets/images/museums/rajasthan-state-museum.jpg",
+    "exists": true,
+    "size": 100947,
+    "format": "JPEG"
+  },
+  {
+    "id": 22,
+    "name": "Calico Museum of Textiles",
+    "state": "Gujarat",
+    "city": "Ahmedabad",
+    "image": "assets/images/museums/calico-museum-of-textiles.jpg",
+    "exists": true,
+    "size": 238066,
+    "format": "JPEG"
+  },
+  {
+    "id": 23,
+    "name": "Vikram Sarabhai Space Exhibition",
+    "state": "Gujarat",
+    "city": "Ahmedabad",
+    "image": "assets/images/museums/vikram-sarabhai-space-exhibition.jpg",
+    "exists": true,
+    "size": 205773,
+    "format": "JPEG"
+  },
+  {
+    "id": 24,
+    "name": "Varanasi Museum",
+    "state": "Uttar Pradesh",
+    "city": "Varanasi",
+    "image": "assets/images/museums/varanasi-museum.jpg",
+    "exists": true,
+    "size": 163782,
+    "format": "JPEG"
+  },
+  {
+    "id": 25,
+    "name": "Allahabad Museum",
+    "state": "Uttar Pradesh",
+    "city": "Prayagraj",
+    "image": "assets/images/museums/allahabad-museum.jpg",
+    "exists": true,
+    "size": 177002,
+    "format": "JPEG"
+  },
+  {
+    "id": 26,
+    "name": "Lucknow Museum",
+    "state": "Uttar Pradesh",
+    "city": "Lucknow",
+    "image": "assets/images/museums/lucknow-museum.jpg",
+    "exists": true,
+    "size": 386964,
+    "format": "PNG"
+  },
+  {
+    "id": 27,
+    "name": "Kanpur Museum",
+    "state": "Uttar Pradesh",
+    "city": "Kanpur",
+    "image": "assets/images/museums/kanpur-museum.jpg",
+    "exists": true,
+    "size": 21436,
+    "format": "JPEG"
+  },
+  {
+    "id": 28,
+    "name": "Amaravati Archaeological Museum",
+    "state": "Andhra Pradesh",
+    "city": "Amaravati",
+    "image": "assets/images/museums/amaravati-archaeological-museum.jpg",
+    "exists": true,
+    "size": 117875,
+    "format": "JPEG"
+  },
+  {
+    "id": 29,
+    "name": "Victoria Jubilee Museum",
+    "state": "Andhra Pradesh",
+    "city": "Vijayawada",
+    "image": "assets/images/museums/victoria-jubilee-museum.jpg",
+    "exists": true,
+    "size": 250707,
+    "format": "JPEG"
+  },
+  {
+    "id": 30,
+    "name": "Visakha Museum",
+    "state": "Andhra Pradesh",
+    "city": "Visakhapatnam",
+    "image": "assets/images/museums/visakha-museum.jpg",
+    "exists": true,
+    "size": 238230,
+    "format": "JPEG"
+  },
+  {
+    "id": 31,
+    "name": "Archaeological Site Museum, Nagarjunakonda",
+    "state": "Andhra Pradesh",
+    "city": "Nagarjunakonda",
+    "image": "assets/images/museums/buddhist-sites-at-nagarjunakonda.jpg",
+    "exists": false,
+    "size": 0,
+    "format": "UNKNOWN"
+  },
+  {
+    "id": 32,
+    "name": "Jawaharlal Nehru Museum, Itanagar",
+    "state": "Arunachal Pradesh",
+    "city": "Itanagar",
+    "image": "assets/images/museums/jawaharlal-nehru-museumitanagar.jpg",
+    "exists": true,
+    "size": 112099,
+    "format": "JPEG"
+  },
+  {
+    "id": 33,
+    "name": "Craft Museum and Emporium",
+    "state": "Arunachal Pradesh",
+    "city": "Itanagar",
+    "image": "assets/images/museums/craft-museum-emporium.jpg",
+    "exists": true,
+    "size": 112099,
+    "format": "JPEG"
+  },
+  {
+    "id": 34,
+    "name": "Assam State Museum",
+    "state": "Assam",
+    "city": "Guwahati",
+    "image": "assets/images/museums/assam-state-museum.jpg",
+    "exists": true,
+    "size": 175366,
+    "format": "JPEG"
+  },
+  {
+    "id": 35,
+    "name": "Srimanta Sankardeva Sangrahalaya",
+    "state": "Assam",
+    "city": "Guwahati",
+    "image": "assets/images/museums/srimanta-sankardev.jpg",
+    "exists": true,
+    "size": 141593,
+    "format": "JPEG"
+  },
+  {
+    "id": 36,
+    "name": "Kaziranga Forest Museum",
+    "state": "Assam",
+    "city": "Guwahati",
+    "image": "assets/images/museums/neutral-museum-heritage-2.jpg",
+    "exists": true,
+    "size": 2010,
+    "format": "HTML_ERROR"
+  },
+  {
+    "id": 37,
+    "name": "Patna Museum",
+    "state": "Bihar",
+    "city": "Patna",
+    "image": "assets/images/museums/patna-museum.jpg",
+    "exists": true,
+    "size": 251574,
+    "format": "JPEG"
+  },
+  {
+    "id": 38,
+    "name": "Bihar Museum",
+    "state": "Bihar",
+    "city": "Patna",
+    "image": "assets/images/museums/bihar-museum.jpg",
+    "exists": true,
+    "size": 105368,
+    "format": "JPEG"
+  },
+  {
+    "id": 39,
+    "name": "Nalanda Archaeological Museum",
+    "state": "Bihar",
+    "city": "Patna",
+    "image": "assets/images/museums/nalanda-archaeological-museum.jpg",
+    "exists": true,
+    "size": 201308,
+    "format": "JPEG"
+  },
+  {
+    "id": 40,
+    "name": "Mahant Ghasidas Museum",
+    "state": "Chhattisgarh",
+    "city": "Raipur",
+    "image": "assets/images/museums/mahant-ghasidas-museum.jpg",
+    "exists": true,
+    "size": 173521,
+    "format": "JPEG"
+  },
+  {
+    "id": 41,
+    "name": "Tribal Museum Raipur",
+    "state": "Chhattisgarh",
+    "city": "Raipur",
+    "image": "assets/images/museums/tribal-museum-raipur.jpg",
+    "exists": true,
+    "size": 6023,
+    "format": "JPEG"
+  },
+  {
+    "id": 42,
+    "name": "Archaeological Museum and Portrait Gallery",
+    "state": "Goa",
+    "city": "Old Goa",
+    "image": "assets/images/museums/archaeological-museum.jpg",
+    "exists": true,
+    "size": 174287,
+    "format": "JPEG"
+  },
+  {
+    "id": 43,
+    "name": "Naval Aviation Museum",
+    "state": "Goa",
+    "city": "Vasco da Gama",
+    "image": "assets/images/museums/naval-aviation-museum.jpg",
+    "exists": true,
+    "size": 267158,
+    "format": "JPEG"
+  },
+  {
+    "id": 44,
+    "name": "State Museum",
+    "state": "Manipur",
+    "city": "Imphal",
+    "image": "assets/images/museums/state-museum.jpg",
+    "exists": true,
+    "size": 21686,
+    "format": "JPEG"
+  },
+  {
+    "id": 45,
+    "name": "Gandhi Memorial Museum",
+    "state": "Gujarat",
+    "city": "Ahmedabad",
+    "image": "assets/images/museums/sabarmati-ashram.jpg",
+    "exists": true,
+    "size": 282572,
+    "format": "JPEG"
+  },
+  {
+    "id": 46,
+    "name": "Baroda Museum",
+    "state": "Gujarat",
+    "city": "Ahmedabad",
+    "image": "assets/images/museums/baroda-museum.jpg",
+    "exists": true,
+    "size": 159604,
+    "format": "JPEG"
+  },
+  {
+    "id": 47,
+    "name": "Kurukshetra Panorama Museum",
+    "state": "Haryana",
+    "city": "Kurukshetra",
+    "image": "assets/images/museums/kurukshetra-panorama-museum.jpg",
+    "exists": true,
+    "size": 127760,
+    "format": "JPEG"
+  },
+  {
+    "id": 48,
+    "name": "Dharohar Museum",
+    "state": "Haryana",
+    "city": "Kurukshetra",
+    "image": "assets/images/museums/dharohar-museum.jpg",
+    "exists": true,
+    "size": 131638,
+    "format": "JPEG"
+  },
+  {
+    "id": 49,
+    "name": "Jahaj Kothi Museum",
+    "state": "Haryana",
+    "city": "Hisar",
+    "image": "assets/images/museums/firoz-shah-palace-complex.jpg",
+    "exists": true,
+    "size": 163271,
+    "format": "JPEG"
+  },
+  {
+    "id": 50,
+    "name": "State Museum, Shimla",
+    "state": "Himachal Pradesh",
+    "city": "Shimla",
+    "image": "assets/images/museums/stste-museum-shimla.jpg",
+    "exists": true,
+    "size": 145166,
+    "format": "JPEG"
+  },
+  {
+    "id": 51,
+    "name": "Kangra Art Museum",
+    "state": "Himachal Pradesh",
+    "city": "Shimla",
+    "image": "assets/images/museums/kangra-art-museum.jpg",
+    "exists": true,
+    "size": 381166,
+    "format": "JPEG"
+  },
+  {
+    "id": 52,
+    "name": "SPS Museum",
+    "state": "Jammu & Kashmir",
+    "city": "Srinagar",
+    "image": "assets/images/museums/sps-museum.jpg",
+    "exists": true,
+    "size": 241213,
+    "format": "JPEG"
+  },
+  {
+    "id": 53,
+    "name": "Stok Palace Museum",
+    "state": "Jammu & Kashmir",
+    "city": "Srinagar",
+    "image": "assets/images/museums/stok-palace-museum.jpg",
+    "exists": true,
+    "size": 173649,
+    "format": "JPEG"
+  },
+  {
+    "id": 54,
+    "name": "State Museum Hotwar",
+    "state": "Jharkhand",
+    "city": "Ranchi",
+    "image": "assets/images/museums/state-museum-hotwar.jpg",
+    "exists": true,
+    "size": 204674,
+    "format": "JPEG"
+  },
+  {
+    "id": 55,
+    "name": "Tribal Research Institute Museum",
+    "state": "Jharkhand",
+    "city": "Ranchi",
+    "image": "assets/images/museums/tribal-research-institute-museum.jpg",
+    "exists": true,
+    "size": 638548,
+    "format": "JPEG"
+  },
+  {
+    "id": 56,
+    "name": "Mysore Sand Sculpture Museum",
+    "state": "Karnataka",
+    "city": "Bengaluru",
+    "image": "assets/images/museums/mysore-sand-sculpture-museum.jpg",
+    "exists": true,
+    "size": 259100,
+    "format": "JPEG"
+  },
+  {
+    "id": 57,
+    "name": "Railway Museum",
+    "state": "Karnataka",
+    "city": "Bengaluru",
+    "image": "assets/images/museums/railway-museum.jpg",
+    "exists": true,
+    "size": 203035,
+    "format": "JPEG"
+  },
+  {
+    "id": 58,
+    "name": "Mysore Palace Residential Museum",
+    "state": "Karnataka",
+    "city": "Mysuru",
+    "image": "assets/images/museums/mysore-palace.jpg",
+    "exists": true,
+    "size": 133074,
+    "format": "JPEG"
+  },
+  {
+    "id": 59,
+    "name": "Hill Palace Museum",
+    "state": "Kerala",
+    "city": "Thiruvananthapuram",
+    "image": "assets/images/museums/hill-palace-museum.jpg",
+    "exists": true,
+    "size": 528987,
+    "format": "JPEG"
+  },
+  {
+    "id": 60,
+    "name": "Kerela State Museum",
+    "state": "Kerala",
+    "city": "Thiruvananthapuram",
+    "image": "assets/images/museums/kerela-state-museum.jpg",
+    "exists": true,
+    "size": 238337,
+    "format": "JPEG"
+  },
+  {
+    "id": 61,
+    "name": "Indo-Portuguese Museums",
+    "state": "Kerala",
+    "city": "Kochi",
+    "image": "assets/images/museums/indo-portuguese-museums.jpg",
+    "exists": true,
+    "size": 155863,
+    "format": "JPEG"
+  },
+  {
+    "id": 62,
+    "name": "Mattancherry Palace and Museum",
+    "state": "Kerala",
+    "city": "Kochi",
+    "image": "assets/images/museums/mattancherry-palace.jpg",
+    "exists": true,
+    "size": 158821,
+    "format": "JPEG"
+  },
+  {
+    "id": 63,
+    "name": "State Museum Bhopal",
+    "state": "Madhya Pradesh",
+    "city": "Bhopal",
+    "image": "assets/images/museums/state-museum-bhopal.jpg",
+    "exists": true,
+    "size": 160721,
+    "format": "JPEG"
+  },
+  {
+    "id": 64,
+    "name": "Tribal Museum Bhopal",
+    "state": "Madhya Pradesh",
+    "city": "Bhopal",
+    "image": "assets/images/museums/tribal-museum-bhopal.jpg",
+    "exists": true,
+    "size": 253635,
+    "format": "JPEG"
+  },
+  {
+    "id": 65,
+    "name": "Archaeological Museum Khajuraho",
+    "state": "Madhya Pradesh",
+    "city": "Bhopal",
+    "image": "assets/images/museums/archaeological-museum-khajuraho.jpg",
+    "exists": true,
+    "size": 565376,
+    "format": "JPEG"
+  },
+  {
+    "id": 66,
+    "name": "Don Bosco Museum",
+    "state": "Meghalaya",
+    "city": "Shillong",
+    "image": "assets/images/museums/don-bosco-museum.jpg",
+    "exists": true,
+    "size": 329211,
+    "format": "JPEG"
+  },
+  {
+    "id": 67,
+    "name": "Wankhar Entomology Museum",
+    "state": "Meghalaya",
+    "city": "Shillong",
+    "image": "assets/images/museums/butterfly-museum.jpg",
+    "exists": true,
+    "size": 119710,
+    "format": "JPEG"
+  },
+  {
+    "id": 68,
+    "name": "Mizoram State Museum",
+    "state": "Mizoram",
+    "city": "Aizawl",
+    "image": "assets/images/museums/mizoram-state-museum.jpg",
+    "exists": true,
+    "size": 196022,
+    "format": "JPEG"
+  },
+  {
+    "id": 69,
+    "name": "State Museum Kohima",
+    "state": "Nagaland",
+    "city": "Kohima",
+    "image": "assets/images/museums/state-museum-kohima.jpg",
+    "exists": true,
+    "size": 190180,
+    "format": "JPEG"
+  },
+  {
+    "id": 70,
+    "name": "World War II Museum",
+    "state": "Nagaland",
+    "city": "Kohima",
+    "image": "assets/images/museums/world-war-ii-museum.jpg",
+    "exists": true,
+    "size": 211772,
+    "format": "JPEG"
+  },
+  {
+    "id": 71,
+    "name": "State Museum Bhubaneswar",
+    "state": "Odisha",
+    "city": "Bhubaneswar",
+    "image": "assets/images/museums/state-museum-bhubaneswar.jpg",
+    "exists": true,
+    "size": 231891,
+    "format": "JPEG"
+  },
+  {
+    "id": 72,
+    "name": "Tribal Museum",
+    "state": "Odisha",
+    "city": "Bhubaneswar",
+    "image": "assets/images/museums/tribal-museum.jpg",
+    "exists": true,
+    "size": 139114,
+    "format": "JPEG"
+  },
+  {
+    "id": 73,
+    "name": "Odisha State Maritime Museum",
+    "state": "Odisha",
+    "city": "Cuttack",
+    "image": "assets/images/museums/maritime-museum-monuments.jpg",
+    "exists": true,
+    "size": 124779,
+    "format": "JPEG"
+  },
+  {
+    "id": 74,
+    "name": "Government Museum Chandigarh",
+    "state": "Punjab",
+    "city": "Amritsar",
+    "image": "assets/images/museums/government-museum-chandigarh.jpg",
+    "exists": true,
+    "size": 139538,
+    "format": "JPEG"
+  },
+  {
+    "id": 75,
+    "name": "Partition Museum Amritsar",
+    "state": "Punjab",
+    "city": "Amritsar",
+    "image": "assets/images/museums/partition-museum-amritsar.jpg",
+    "exists": true,
+    "size": 267917,
+    "format": "JPEG"
+  },
+  {
+    "id": 76,
+    "name": "Maharaja Ranjit Singh Museum",
+    "state": "Punjab",
+    "city": "Amritsar",
+    "image": "assets/images/museums/maharaja-ranjit-singh-museum.jpg",
+    "exists": true,
+    "size": 593960,
+    "format": "JPEG"
+  },
+  {
+    "id": 77,
+    "name": "Mehrangarh Museum",
+    "state": "Rajasthan",
+    "city": "Jaipur",
+    "image": "assets/images/museums/mehrangarh-museum.jpg",
+    "exists": true,
+    "size": 256755,
+    "format": "JPEG"
+  },
+  {
+    "id": 78,
+    "name": "Namgyal Institute of Tibetology",
+    "state": "Sikkim",
+    "city": "Gangtok",
+    "image": "assets/images/museums/namgyal-institute-of-tibetology.jpg",
+    "exists": true,
+    "size": 203768,
+    "format": "JPEG"
+  },
+  {
+    "id": 79,
+    "name": "Government Museum",
+    "state": "Tamil Nadu",
+    "city": "Chennai",
+    "image": "assets/images/museums/government-museum.jpg",
+    "exists": true,
+    "size": 139538,
+    "format": "JPEG"
+  },
+  {
+    "id": 80,
+    "name": "Salar Jung Museum",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "image": "assets/images/museums/salar-jung-museum.jpg",
+    "exists": true,
+    "size": 150734,
+    "format": "JPEG"
+  },
+  {
+    "id": 81,
+    "name": "State Archaeological Museum",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "image": "assets/images/museums/state-archaeological-museum.jpg",
+    "exists": true,
+    "size": 126262,
+    "format": "JPEG"
+  },
+  {
+    "id": 82,
+    "name": "City Museum",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "image": "assets/images/museums/city-museum.jpg",
+    "exists": true,
+    "size": 287355,
+    "format": "JPEG"
+  },
+  {
+    "id": 83,
+    "name": "Tripura State Museum",
+    "state": "Tripura",
+    "city": "Agartala",
+    "image": "assets/images/museums/tripura-state-museum.jpg",
+    "exists": true,
+    "size": 181289,
+    "format": "JPEG"
+  },
+  {
+    "id": 84,
+    "name": "State Museum Lucknow",
+    "state": "Uttar Pradesh",
+    "city": "Agra",
+    "image": "assets/images/museums/state-museum-lucknow.jpg",
+    "exists": true,
+    "size": 386964,
+    "format": "PNG"
+  },
+  {
+    "id": 85,
+    "name": "Sarnath Museum",
+    "state": "Uttar Pradesh",
+    "city": "Agra",
+    "image": "assets/images/museums/sarnath-museum.jpg",
+    "exists": true,
+    "size": 170261,
+    "format": "JPEG"
+  },
+  {
+    "id": 86,
+    "name": "State Museum Dehradun",
+    "state": "Uttarakhand",
+    "city": "Dehradun",
+    "image": "assets/images/museums/state-museum-dehradun.jpg",
+    "exists": true,
+    "size": 139088,
+    "format": "JPEG"
+  },
+  {
+    "id": 87,
+    "name": "Jim Corbett Museum",
+    "state": "Uttarakhand",
+    "city": "Dehradun",
+    "image": "assets/images/museums/jim-corbett-museum.jpg",
+    "exists": true,
+    "size": 139297,
+    "format": "JPEG"
+  },
+  {
+    "id": 88,
+    "name": "Hazarduari Palace Museum",
+    "state": "West Bengal",
+    "city": "Murshidabad",
+    "image": "assets/images/museums/hazarduari-temple.jpg",
+    "exists": true,
+    "size": 85392,
+    "format": "JPEG"
+  },
+  {
+    "id": 89,
+    "name": "Victoria Memorial",
+    "state": "West Bengal",
+    "city": "Kolkata",
+    "image": "assets/images/museums/victoria-memorial.jpg",
+    "exists": true,
+    "size": 101877,
+    "format": "JPEG"
+  }
+]

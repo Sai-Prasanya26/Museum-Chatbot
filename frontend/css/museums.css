@@ -1,0 +1,391 @@
+/* ==========================================================
+   Famous Museums in India - Authentic Original Museum Styles
+   Extracted from original login1/museumpage.html
+   ========================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    line-height: 1.6;
+    background-color: #f5f5f5;
+    color: #333;
+    min-height: 100vh;
+}
+
+/* Nav header (legacy support for standalone header.site-nav) */
+header.site-nav:not(.site-header) {
+    background-color: #ffffff;
+    padding: 1rem 5%;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+header.site-nav:not(.site-header) nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+header.site-nav:not(.site-header) .logo {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #FF9933;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+}
+
+header.site-nav:not(.site-header) .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+header.site-nav:not(.site-header) .nav-links a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+header.site-nav:not(.site-header) .nav-links a:hover, header.site-nav:not(.site-header) .nav-links a.active {
+    color: #FF9933;
+}
+
+.main-content-wrap {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 25px 20px;
+}
+
+.page-header,
+header.page-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: static;
+    height: auto;
+    width: 100%;
+    padding: 35px 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    margin: 0 auto 30px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-bottom: none;
+}
+
+.page-header h1,
+header.page-header h1 {
+    color: #1e293b;
+    margin: 0 0 12px 0;
+    font-size: 2.3em;
+    font-weight: 700;
+    text-align: center;
+    width: 100%;
+    line-height: 1.25;
+}
+
+.page-header p,
+header.page-header p {
+    color: #64748b;
+    font-size: 1.1em;
+    margin: 0;
+    text-align: center;
+    width: 100%;
+    max-width: 750px;
+    line-height: 1.5;
+}
+
+.search-container {
+    max-width: 700px;
+    margin: 0 auto 25px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.search-box {
+    flex: 2;
+    min-width: 250px;
+    padding: 12px 18px;
+    font-size: 15px;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.search-box:focus {
+    border-color: #2962ff;
+}
+
+.state-select {
+    flex: 1;
+    min-width: 180px;
+    padding: 12px 14px;
+    font-size: 15px;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    background: white;
+    cursor: pointer;
+    outline: none;
+}
+
+.state-select:focus {
+    border-color: #2962ff;
+}
+
+.results-info {
+    display: none !important;
+}
+
+.no-results {
+    text-align: center;
+    padding: 40px;
+    color: #666;
+    background: white;
+    border-radius: 8px;
+    margin: 20px 0;
+    display: none;
+}
+
+.museum-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 25px;
+}
+
+.museum-card {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.museum-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.museum-image {
+    width: 100%;
+    height: 200px;
+    background-color: #e2e8f0;
+    overflow: hidden;
+    position: relative;
+}
+
+.museum-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.museum-card:hover .museum-image img {
+    transform: scale(1.05);
+}
+
+.museum-info {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.museum-info h2 {
+    color: #222;
+    margin: 0 0 8px 0;
+    font-size: 1.3em;
+}
+
+.museum-info p {
+    color: #666;
+    margin-bottom: 12px;
+    font-size: 0.95em;
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.location {
+    color: #777;
+    font-size: 0.9em;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 15px;
+}
+
+.card-footer-action {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+    padding-top: 14px;
+    border-top: 1px solid #f0f0f0;
+}
+
+.price-tag,
+.card-price {
+    color: #2962ff;
+    font-weight: bold;
+    font-size: 1.05rem;
+}
+
+.book-btn {
+    background-color: #FF9933;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.9rem;
+    transition: background-color 0.2s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.book-btn:hover {
+    background-color: #e67e17;
+}
+
+/* Detail page styling - imported from museum-details.css */
+@import url('/css/museum-details.css');
+
+@media (max-width: 480px) {
+    .page-header,
+    header.page-header {
+        padding: 22px 14px;
+        margin-bottom: 20px;
+    }
+
+    .page-header h1,
+    header.page-header h1 {
+        font-size: 1.55em;
+    }
+
+    .page-header p,
+    header.page-header p {
+        font-size: 0.92rem;
+    }
+
+    .search-container {
+        padding: 14px;
+        gap: 10px;
+    }
+
+    .search-box,
+    .state-select {
+        min-width: 100%;
+        flex: 1 1 100%;
+    }
+}
+
+/* Profile Dropdown */
+.profile-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.profile-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    padding: 7px 14px;
+    border-radius: 24px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #1e293b;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.profile-btn:hover {
+    background: #f1f5f9;
+    border-color: #cbd5e1;
+    color: #FF9933;
+}
+
+.profile-btn i.fa-user-circle {
+    font-size: 1.15rem;
+    color: #FF9933;
+}
+
+.dropdown-menu {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 8px);
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12), 0 4px 10px rgba(0, 0, 0, 0.05);
+    min-width: 200px;
+    display: none;
+    flex-direction: column;
+    padding: 6px 0;
+    z-index: 10001;
+    overflow: hidden;
+}
+
+.dropdown-menu.active {
+    display: flex !important;
+}
+
+.dropdown-menu a, .dropdown-menu .dropdown-item {
+    padding: 10px 18px;
+    font-size: 0.92rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #334155;
+    text-decoration: none;
+    transition: background 0.15s ease, color 0.15s ease;
+}
+
+.dropdown-menu a:hover, .dropdown-menu .dropdown-item:hover {
+    background: #f8fafc;
+    color: #FF9933;
+}
+
+.dropdown-menu .admin-item {
+    color: #4f46e5 !important;
+    font-weight: 600 !important;
+}
+
+.dropdown-menu .logout-item {
+    color: #ef4444 !important;
+}
+
+.dropdown-divider {
+    border: none;
+    border-top: 1px solid #e2e8f0;
+    margin: 4px 0;
+}
+

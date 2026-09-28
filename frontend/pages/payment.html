@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UPI Payment - Museum Explorer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/payment.css">
+    <link rel="stylesheet" href="/css/chatbot.css">
+    <style>
+        .status-badge-custom {
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.92rem;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+        .status-pending {
+            background-color: #fef3c7;
+            color: #92400e;
+            border: 1.5px solid #f59e0b;
+        }
+        .status-processing {
+            background-color: #dbeafe;
+            color: #1e40af;
+            border: 1.5px solid #3b82f6;
+        }
+        .status-verified {
+            background-color: #dcfce7;
+            color: #166534;
+            border: 1.5px solid #22c55e;
+        }
+        .status-failed {
+            background-color: #fee2e2;
+            color: #991b1b;
+            border: 1.5px solid #ef4444;
+        }
+        .copy-upi-btn {
+            background: #eff6ff;
+            color: #1d4ed8;
+            border: 1px solid #bfdbfe;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-left: 8px;
+        }
+        .important-notice {
+            background: #fffbeb;
+            border: 1px solid #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 12px 16px;
+            border-radius: 6px;
+            font-size: 0.92rem;
+            color: #92400e;
+            margin-top: 18px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Navbar -->
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="/pages/homepage.html" class="logo">
+                <i class="fas fa-landmark"></i>
+                <span>Museum Explorer</span>
+            </a>
+            <div class="nav-links">
+                <a href="/pages/homepage.html">Home</a>
+                <a href="/pages/museums.html">Museums</a>
+                <a href="/pages/mybookings.html">My Bookings</a>
+            </div>
+            <div id="userNavSection" class="auth-buttons">
+                <!-- Managed by common.js -->
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="container" style="padding-top: 1.5rem; padding-bottom: 4rem;">
+
+        <!-- Step Indicator -->
+        <div style="display: flex; justify-content: center; gap: 2rem; margin-bottom: 1.5rem;">
+            <div style="display: flex; align-items: center; gap: 0.5rem; font-weight: 500; color: #16a34a;">
+                <span style="width: 28px; height: 28px; background: #16a34a; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.85rem;"><i class="fas fa-check"></i></span>
+                <span>Select Tickets</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 0.5rem; font-weight: 700; color: var(--primary);">
+                <span style="width: 28px; height: 28px; background: var(--primary); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.85rem;">2</span>
+                <span>UPI Payment</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 0.5rem; font-weight: 500; color: var(--text-muted);">
+                <span style="width: 28px; height: 28px; background: #e2e8f0; color: var(--text-muted); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.85rem;">3</span>
+                <span>Confirmation</span>
+            </div>
+        </div>
+
+        <div class="payment-layout">
+            <div class="payment-header">
+                <h1 id="paymentHeaderTitle">Museum Booking & UPI Payment</h1>
+                <p>Scan the QR code with any UPI app to complete the payment</p>
+            </div>
+
+            <div class="payment-body">
+                <!-- Booking Order Summary Box -->
+                <div style="background: #f8fafc; border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 1.2rem; margin-bottom: 1.8rem;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.4rem;">
+                        <span style="color: var(--text-muted);">Museum:</span>
+                        <strong id="summaryMuseumName" style="color: var(--text-dark);">Loading...</strong>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.4rem;">
+                        <span style="color: var(--text-muted);">Customer Name:</span>
+                        <strong id="summaryCustomerName" style="color: var(--text-dark);">--</strong>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.4rem;">
+                        <span style="color: var(--text-muted);">Customer Email:</span>
+                        <strong id="summaryCustomerEmail" style="color: var(--text-dark);">--</strong>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.4rem;">
+                        <span style="color: var(--text-muted);">Visit Date:</span>
+                        <strong id="summaryDate" style="color: var(--text-dark);">Loading...</strong>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.4rem;">
+                        <span style="color: var(--text-muted);">Visitors:</span>
+                        <span id="summaryVisitors" style="font-weight: 500;">Loading...</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; border-top: 1px solid #e2e8f0; padding-top: 0.6rem; margin-top: 0.6rem;">
+                        <span style="font-weight: 600; color: var(--text-dark);">Total Amount:</span>
+                        <strong id="summaryTotal" style="color: #16a34a; font-size: 1.25rem;">₹0</strong>
+                    </div>
+                </div>
+
+                <!-- UPI Section ONLY (Card completely removed) -->
+                <div id="upiSection" class="upi-section" style="display: block; text-align: center;">
+                    <h3 style="color: #1e3a8a; font-weight: bold;"><i class="fas fa-qrcode"></i> UPI PAYMENT</h3>
+                    <p style="color: var(--text-muted); font-size: 0.95rem; margin-top: 4px;">
+                        Scan the QR code with any UPI app to pay (GPay, PhonePe, Paytm, BHIM, Cred)
+                    </p>
+
+                    <div class="qr-code-box" style="margin: 1.5rem auto 1rem; width: 220px; height: 220px; background: white; padding: 10px; border-radius: 10px; border: 2px solid #e2e8f0;">
+                        <img id="paymentQrImg" src="/images/scanner.png" alt="UPI QR Code" style="width: 100%; height: 100%; object-fit: contain;" onerror="this.src='/assets/images/scanner.png';">
+                    </div>
+
+                    <div style="font-size: 1rem; color: #1e293b; margin: 10px 0 15px;">
+                        UPI ID: <strong id="configuredUpiId" style="color: #1e3a8a; font-family: monospace;">museums.tickets@icici</strong>
+                        <button type="button" class="copy-upi-btn" onclick="copyUpiId()"><i class="far fa-copy"></i> Copy</button>
+                    </div>
+
+                    <!-- Payment Status Indicator -->
+                    <div style="margin: 15px 0; padding: 10px; background: #f8fafc; border-radius: 6px; border: 1px solid #e2e8f0;">
+                        <div style="font-size: 0.8rem; color: #64748b; font-weight: bold; text-transform: uppercase; margin-bottom: 4px;">Payment Status:</div>
+                        <span id="paymentStatusBadge" class="status-badge-custom status-pending">PENDING</span>
+                    </div>
+
+                    <!-- UPI Transaction Reference Input -->
+                    <div style="text-align: left; margin-top: 20px; padding: 16px; background: #fdfefe; border: 1.5px solid #cbd5e1; border-radius: 8px;">
+                        <label for="upiTxnId" style="display: block; margin-bottom: 0.4rem; font-size: 0.95rem; font-weight: 700; color: #0f172a;">
+                            <i class="fas fa-receipt"></i> Enter UPI Transaction Reference / UTR Number:
+                        </label>
+                        <input type="text" id="upiTxnId" placeholder="e.g. 428912345678 (12-digit UTR)" maxlength="40" style="width: 100%; padding: 0.75rem 1rem; border: 1.5px solid #94a3b8; border-radius: var(--radius-sm); font-size: 1rem; font-family: monospace;">
+                        <small style="color: var(--text-muted); display: block; margin-top: 4px;">Enter the 12-digit UTR or reference ID from your UPI app payment receipt.</small>
+                    </div>
+                </div>
+
+                <div id="paymentAlert" style="margin-top: 15px; font-weight: 600; text-align: center; min-height: 22px;"></div>
+
+                <button id="confirmPayBtn" class="btn btn-primary btn-block btn-lg" style="margin-top: 15px; background: #16a34a; border-color: #16a34a;">
+                    <i class="fas fa-shield-alt"></i> Verify Payment & Confirm Booking
+                </button>
+
+                <div class="important-notice">
+                    <i class="fas fa-exclamation-triangle"></i> <strong>Important:</strong> Your booking will be confirmed only after successful payment verification.
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-col">
+                <div class="logo" style="color: #ffffff; margin-bottom: 0.8rem;">
+                    <i class="fas fa-landmark" style="color: var(--primary);"></i>
+                    <span>Museum Explorer</span>
+                </div>
+                <p style="color: #94a3b8; font-size: 0.9rem; line-height: 1.6;">
+                    Direct online e-ticketing platform for cultural, archaeological, and art institutions across India.
+                </p>
+            </div>
+            <div class="footer-col">
+                <h4>Support</h4>
+                <ul class="footer-links">
+                    <li><a href="/pages/homepage.html">Home</a></li>
+                    <li><a href="/pages/museums.html">Museums</a></li>
+                    <li><a href="/pages/mybookings.html">My Bookings</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Verified Checkouts</h4>
+                <p style="color: #94a3b8; font-size: 0.88rem; line-height: 1.6;">
+                    Payments are handled with instant verification and transaction receipts stored directly in MySQL.
+                </p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Museum Explorer. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="/js/api.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/payment.js"></script>
+</body>
+</html>

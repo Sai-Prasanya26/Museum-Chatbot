@@ -1,0 +1,37 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "1. Start MySQL Database",
+      "type": "shell",
+      "command": "& 'C:\\Program Files\\MySQL\\MySQL Server 8.0\\bin\\mysqld.exe' --datadir='C:\\Users\\saipr.SAIPRASANYA.000\\Desktop\\Puppyyy\\mysql-data' --port=3306 --console",
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    },
+    {
+      "label": "2. Start Web Server",
+      "type": "shell",
+      "command": "node backend/server.js",
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    },
+    {
+      "label": "3. Open MySQL Terminal (No Password)",
+      "type": "shell",
+      "command": "& 'C:\\Program Files\\MySQL\\MySQL Server 8.0\\bin\\mysql.exe' -u root",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    }
+  ]
+}
